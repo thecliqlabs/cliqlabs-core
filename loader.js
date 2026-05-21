@@ -1,63 +1,66 @@
 (function() {
   'use strict';
 
+  // ============================================
   // TheCliqLabs Loader v1.0
-  var AGENCY_ID = document.currentScript && 
-    document.currentScript.src.split('id=')[1] || 'default';
-  
-  function waitForElement(selector, callback, maxWait) {
+  // ============================================
+
+  var PANEL_URL = 'https://thecliqlabs.netlify.app';
+
+  // Wait for any element to appear in DOM
+  function waitFor(selector, callback, maxWait) {
     var waited = 0;
     var interval = setInterval(function() {
       var el = document.querySelector(selector);
-      if (el) {
-        clearInterval(interval);
-        callback(el);
-      }
-      waited += 200;
-      if (waited >= (maxWait || 10000)) {
-        clearInterval(interval);
-      }
-    }, 200);
+      if (el) { clearInterval(interval); callback(el); }
+      waited += 300;
+      if (waited >= (maxWait || 15000)) clearInterval(interval);
+    }, 300);
   }
 
+  // ============================================
+  // STEP 1 — Inject CliqLabs into GHL sidebar
+  // ============================================
   function injectSidebarMenu() {
-    waitForElement('.hl_nav-settings', function(navSettings) {
-      
-      // Don't inject twice
-      if (document.getElementById('cliqlabs-menu-item')) return;
+    if (document.getElementById('cliqlabs-nav-item')) return;
+
+    waitFor('.hl_nav-settings', function(navSettings) {
+      if (document.getElementById('cliqlabs-nav-item')) return;
 
       var menuItem = document.createElement('a');
-      menuItem.id = 'cliqlabs-menu-item';
+      menuItem.id = 'cliqlabs-nav-item';
       menuItem.href = '#';
+      menuItem.className = 'w-full group px-3 flex items-center justify-start lg:justify-start xl:justify-start text-sm font-medium rounded-md cursor-pointer py-2 md:py-2';
+      menuItem.style.cssText = 'opacity:0.85; transition:opacity 0.2s;';
       menuItem.innerHTML = `
-        <div style="
-          display: flex;
-          align-items: center;
-          padding: 8px 12px;
-          cursor: pointer;
-          opacity: 0.85;
-          transition: opacity 0.2s;
+        <span style="
+          display:flex;
+          align-items:center;
+          gap:8px;
+          font-size:14px;
+          font-weight:600;
+          font-family:Inter,sans-serif;
+          width:100%;
         ">
-          <img 
-            src="https://cdn.thecliqlabs.com/assets/icon.png" 
-            style="width:20px; height:20px; margin-right:8px; border-radius:3px;"
-            onerror="this.style.display='none'"
-          />
+          <span style="font-size:16px;">⚡</span>
+          <span class="hl_text-overflow sm:hidden md:hidden nav-title lg:block xl:block">
+            CliqLabs
+          </span>
           <span style="
-            font-size: 14px;
-            font-weight: 600;
-            font-family: Inter, sans-serif;
-          ">CliqLabs</span>
-        </div>
+            background:#673de6;
+            color:white;
+            font-size:9px;
+            font-weight:800;
+            padding:2px 5px;
+            border-radius:3px;
+            margin-left:auto;
+            letter-spacing:0.5px;
+          ">NEW</span>
+        </span>
       `;
 
-      menuItem.addEventListener('mouseenter', function() {
-        this.style.opacity = '1';
-      });
-      menuItem.addEventListener('mouseleave', function() {
-        this.style.opacity = '0.85';
-      });
-
+      menuItem.addEventListener('mouseenter', function() { this.style.opacity = '1'; });
+      menuItem.addEventListener('mouseleave', function() { this.style.opacity = '0.85'; });
       menuItem.addEventListener('click', function(e) {
         e.preventDefault();
         openControlPanel();
@@ -67,94 +70,171 @@
     });
   }
 
+  // ============================================
+  // STEP 2 — Open Control Panel as full page
+  // ============================================
   function openControlPanel() {
-    // Don't open twice
-    if (document.getElementById('cliqlabs-panel')) return;
+    if (document.getElementById('cliqlabs-panel-container')) return;
 
-    var overlay = document.createElement('div');
-    overlay.id = 'cliqlabs-panel';
-    overlay.style.cssText = `
+    // Get GHL main content area
+    var mainContent = document.querySelector('.w-full.h-full') ||
+                      document.querySelector('[class*="hl_wrapper"]') ||
+                      document.querySelector('#app > div > div:last-child') ||
+                      document.body;
+
+    var container = document.createElement('div');
+    container.id = 'cliqlabs-panel-container';
+    container.style.cssText = `
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.5);
-    `;
-
-    var panel = document.createElement('div');
-    panel.style.cssText = `
-      width: 900px;
-      max-width: 95vw;
-      height: 85vh;
+      top: 0;
+      left: 160px;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
       background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-      display: flex;
-      flex-direction: column;
-    `;
-
-    var header = document.createElement('div');
-    header.style.cssText = `
-      background: #0a0a0a;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    `;
-    header.innerHTML = `
-      <span style="color:white; font-weight:900; font-size:18px; font-family:Arial Black, sans-serif;">
-        TheCliq<span style="color:#5fc800;">Labs</span>
-      </span>
-      <button id="cliqlabs-close" style="
-        background: none;
-        border: none;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        line-height: 1;
-        padding: 0 4px;
-      ">×</button>
     `;
 
     var iframe = document.createElement('iframe');
-    iframe.src = 'https://thecliqlabs.netlify.app?agency=' + AGENCY_ID;
+    iframe.src = PANEL_URL;
     iframe.style.cssText = `
       width: 100%;
-      flex: 1;
+      height: 100%;
       border: none;
     `;
 
-    panel.appendChild(header);
-    panel.appendChild(iframe);
-    overlay.appendChild(panel);
-    document.body.appendChild(overlay);
+    container.appendChild(iframe);
+    document.body.appendChild(container);
 
-    document.getElementById('cliqlabs-close').addEventListener('click', function() {
-      overlay.remove();
-    });
-
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) overlay.remove();
+    // Listen for close message from panel
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'cliqlabs-close-panel') {
+        closeControlPanel();
+      }
+      if (e.data && e.data.type === 'cliqlabs-apply-theme') {
+        applyThemeCSS(e.data.settings);
+      }
     });
   }
 
-  // Wait for GHL to fully load then inject
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', injectSidebarMenu);
-  } else {
-    setTimeout(injectSidebarMenu, 2000);
+  function closeControlPanel() {
+    var container = document.getElementById('cliqlabs-panel-container');
+    if (container) container.remove();
   }
 
-  // Re-inject on GHL navigation (it's a SPA)
+  // ============================================
+  // STEP 3 — Apply Theme CSS to GHL
+  // ============================================
+  function applyThemeCSS(settings) {
+    var existing = document.getElementById('cliqlabs-theme-css');
+    if (existing) existing.remove();
+
+    var primary = settings.primaryColor || '#673de6';
+    var sidebar = settings.sidebarColor || '#1a1a2e';
+    var iconColor = settings.iconColor || '#ffffff';
+
+    var css = `
+      /* TheCliqLabs Theme */
+      #sidebar-v2, .default-bg-color {
+        background-color: ${sidebar} !important;
+      }
+      #sidebar-v2 a[id^="sb_"] .nav-title,
+      #sidebar-v2 a[id^="sb_"] span {
+        color: ${iconColor} !important;
+      }
+      #sidebar-v2 a[id^="sb_"].active,
+      #sidebar-v2 a[id^="sb_"].exact-active {
+        background: ${primary}22 !important;
+        border-left: 3px solid ${primary} !important;
+      }
+      #location-switcher-sidbar-v2 {
+        background: rgba(255,255,255,0.08) !important;
+        border-radius: 8px !important;
+      }
+      #globalSearchOpener, #quickActions {
+        background: rgba(255,255,255,0.08) !important;
+        border-radius: 6px !important;
+      }
+      .n-button--primary-type,
+      .hr-button--primary-type,
+      #new-appointment-button,
+      #add-record-btn,
+      #data-create-opportunity,
+      #new-conversation-btn-collapsed,
+      #hl-media-upload,
+      #create-new-button {
+        background-color: ${primary} !important;
+      }
+      a.topmenu-navitem.active {
+        color: ${primary} !important;
+        border-bottom-color: ${primary} !important;
+      }
+      .n-button--tertiary-type,
+      .hr-button--tertiary-type {
+        background-color: ${primary}22 !important;
+        color: ${primary} !important;
+      }
+      .n-pagination-item--active {
+        color: ${primary} !important;
+        border-color: ${primary} !important;
+      }
+      #hl_header--help-icon {
+        background-color: ${primary} !important;
+      }
+      .tabulator-page.active {
+        color: ${primary} !important;
+        border-color: ${primary} !important;
+      }
+      svg.text-primary-600,
+      svg.h-5.w-5.text-primary-600 {
+        color: ${primary} !important;
+      }
+    `;
+
+    var style = document.createElement('style');
+    style.id = 'cliqlabs-theme-css';
+    style.textContent = css;
+    document.head.appendChild(style);
+
+    // Save to localStorage
+    localStorage.setItem('cliqlabs_settings', JSON.stringify(settings));
+  }
+
+  // ============================================
+  // STEP 4 — Auto-load saved theme on page load
+  // ============================================
+  function loadSavedTheme() {
+    var saved = localStorage.getItem('cliqlabs_settings');
+    if (saved) {
+      try {
+        var settings = JSON.parse(saved);
+        applyThemeCSS(settings);
+      } catch(e) {}
+    }
+  }
+
+  // ============================================
+  // STEP 5 — Handle GHL SPA navigation
+  // ============================================
   var lastUrl = location.href;
   new MutationObserver(function() {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
       setTimeout(injectSidebarMenu, 1500);
+      setTimeout(loadSavedTheme, 500);
     }
   }).observe(document, { subtree: true, childList: true });
+
+  // ============================================
+  // INIT
+  // ============================================
+  loadSavedTheme();
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(injectSidebarMenu, 2000);
+    });
+  } else {
+    setTimeout(injectSidebarMenu, 2000);
+  }
 
 })();
