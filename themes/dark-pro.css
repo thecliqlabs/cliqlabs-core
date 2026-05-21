@@ -1,22 +1,163 @@
-body{
-  background:#0f172a !important;
+/* =========================
+   CLIQLABS DARK PRO
+========================= */
+
+:root{
+  --cl-bg:#0b1020;
+  --cl-sidebar:#0f172a;
+  --cl-card:#111827;
+  --cl-border:#1f2937;
+  --cl-text:#f9fafb;
+  --cl-muted:#94a3b8;
+  --cl-accent:#7c3aed;
+  --cl-hover:#1e293b;
 }
+
+/* MAIN BACKGROUND */
+
+body,
+#app{
+  background:var(--cl-bg)!important;
+}
+
+/* SIDEBAR */
 
 #sidebar-v2{
-  background:#020617 !important;
+  background:var(--cl-sidebar)!important;
+  border-right:1px solid var(--cl-border)!important;
 }
 
-#sidebar-v2 *{
-  color:white !important;
+/* SIDEBAR LINKS */
+
+#sidebar-v2 a,
+#sidebar-v2 span,
+#sidebar-v2 div{
+  color:#dbe4ff!important;
 }
 
-.hl-btn,
-button{
-  border-radius:14px !important;
+/* ACTIVE MENU */
+
+.hl_nav-header-without-footer
+  .hl_nav-link.active{
+    background:rgba(124,58,237,.18)!important;
+    border-left:3px solid var(--cl-accent)!important;
 }
+
+/* HOVER */
+
+.hl_nav-link:hover{
+  background:var(--cl-hover)!important;
+}
+
+/* TOPBAR */
+
+.hl_header,
+.topmenu-nav{
+  background:rgba(15,23,42,.85)!important;
+  backdrop-filter:blur(10px)!important;
+  border-bottom:1px solid var(--cl-border)!important;
+}
+
+/* CARDS */
 
 .card,
-.hl-card{
-  border-radius:20px !important;
-  box-shadow:0 10px 30px rgba(0,0,0,.12) !important;
+.hl-card,
+.dashboard-card,
+.bg-white{
+  background:var(--cl-card)!important;
+  border:1px solid var(--cl-border)!important;
+  border-radius:18px!important;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.35)!important;
+}
+
+/* TEXT */
+
+h1,h2,h3,h4,h5,h6,
+label,
+span,
+div,
+p{
+  color:var(--cl-text)!important;
+}
+
+/* MUTED TEXT */
+
+.text-gray-500,
+.text-gray-600,
+.text-muted{
+  color:var(--cl-muted)!important;
+}
+
+/* INPUTS */
+
+input,
+textarea,
+select{
+  background:#0f172a!important;
+  border:1px solid #334155!important;
+  color:white!important;
+  border-radius:12px!important;
+}
+
+/* INPUT FOCUS */
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--cl-accent)!important;
+  box-shadow:
+    0 0 0 3px rgba(124,58,237,.25)!important;
+}
+
+/* BUTTONS */
+
+button,
+.hl-btn{
+  border-radius:12px!important;
+  transition:all .2s ease!important;
+}
+
+/* PRIMARY BUTTON */
+
+.btn-primary,
+.hl-btn-primary{
+  background:linear-gradient(
+    135deg,
+    #7c3aed,
+    #4f46e5
+  )!important;
+
+  border:none!important;
+}
+
+/* TABLES */
+
+table{
+  background:var(--cl-card)!important;
+  border-radius:16px!important;
+  overflow:hidden!important;
+}
+
+/* MODALS */
+
+.modal-content{
+  background:#111827!important;
+  border:1px solid var(--cl-border)!important;
+  border-radius:20px!important;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#0f172a;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#374151;
+  border-radius:20px;
 }
