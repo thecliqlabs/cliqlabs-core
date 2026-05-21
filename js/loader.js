@@ -56,6 +56,7 @@
 
   // INIT
   loadTheme(activeTheme);
+  loadPanel();
 
   window.addEventListener("load", () => {
     loadPanel();
