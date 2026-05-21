@@ -1,16 +1,14 @@
 /* ================================================
-   TheCliqLabs Live Runtime Theme CSS v5
+   CliqLabs Live Runtime CSS v6
    ================================================ */
 
 :root{
 
-  --nav-menus-background-color:#111827;
-  --nav-menu-text-color:#ffffff;
-  --nav-menu-icon-color:#9ca3af;
-
-  --button-background-color:#374151;
-
-  --card-header-background-color:#1f2937;
+  --cliqlabs-sidebar:#111827;
+  --cliqlabs-text:#ffffff;
+  --cliqlabs-icon:#9ca3af;
+  --cliqlabs-button:#374151;
+  --cliqlabs-card:#1f2937;
 
 }
 
@@ -18,49 +16,43 @@
    SIDEBAR
    ================================================ */
 
-#sidebar-v2,
-#sidebar-v2 *,
-.v2-open #sidebar-v2{
+#sidebar-v2{
 
   background:
-    var(--nav-menus-background-color)
+    var(--cliqlabs-sidebar)
     !important;
 
 }
 
-/* menu text */
-
-#sidebar-v2 span,
-#sidebar-v2 a,
-#sidebar-v2 i{
+#sidebar-v2 *{
 
   color:
-    var(--nav-menu-text-color)
+    var(--cliqlabs-text)
     !important;
 
 }
-
-/* svg icons */
 
 #sidebar-v2 svg path{
 
-  stroke:
-    var(--nav-menu-icon-color)
+  fill:
+    var(--cliqlabs-icon)
     !important;
 
-  fill:
-    var(--nav-menu-icon-color)
+  stroke:
+    var(--cliqlabs-icon)
     !important;
 
 }
 
-/* active menu */
+/* ================================================
+   ACTIVE MENU
+   ================================================ */
 
-#sidebar-v2 nav a.active,
-#sidebar-v2 nav a:hover{
+#sidebar-v2 nav a:hover,
+#sidebar-v2 nav a.active{
 
   background:
-    rgba(255,255,255,0.12)
+    rgba(255,255,255,0.08)
     !important;
 
   border-radius:10px !important;
@@ -68,17 +60,16 @@
 }
 
 /* ================================================
-   TOP BUTTONS
+   BUTTONS
    ================================================ */
 
 button,
 .btn,
-.hl-btn,
 .bg-apple-500,
-button[type="button"]{
+.hl-btn{
 
   background:
-    var(--button-background-color)
+    var(--cliqlabs-button)
     !important;
 
   border:none !important;
@@ -88,14 +79,13 @@ button[type="button"]{
 }
 
 /* ================================================
-   CARDS
+   CARD HEADERS
    ================================================ */
 
-.card-header,
-.dashboard-card-header{
+.card-header{
 
   background:
-    var(--card-header-background-color)
+    var(--cliqlabs-card)
     !important;
 
   color:white !important;
@@ -103,29 +93,11 @@ button[type="button"]{
 }
 
 /* ================================================
-   DROPDOWNS
+   CLIQLABS BUTTON
    ================================================ */
 
-.hl-select-menu,
-.hl-dropdown-menu{
+#cliqlabs-nav-btn{
 
-  border-radius:12px !important;
-
-}
-
-/* ================================================
-   SCROLLBAR
-   ================================================ */
-
-::-webkit-scrollbar{
-  width:8px;
-}
-
-::-webkit-scrollbar-thumb{
-
-  background:
-    var(--button-background-color);
-
-  border-radius:20px;
+  margin-top:8px !important;
 
 }
