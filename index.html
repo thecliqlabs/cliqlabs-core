@@ -721,19 +721,33 @@ td.center{text-align:center;}
 
 <script>
 // SAMPLE SUB-ACCOUNT DATA
-var subAccounts = [
-  {id:'tUtho1b4yEFnC3PYa8', name:'', active:true},
-  {id:'JJJCeG8rmjfteI3ZWDlvI', name:'Lavonda Dukes', active:true},
-  {id:'zS0HKoKI8GTbG0u3Fb0Y', name:'456 Kuhn St', active:true},
-  {id:'ZBZ4UjG0hpI9W0xM6WgM', name:'6 Figure Mindset Community', active:true},
-  {id:'SCdPVsm4G19M9Fmqa6xQ', name:'7 Figure Pro', active:true},
-  {id:'G85rg83nnd0iiY82HICP', name:"???????? ??????'s Account", active:true},
-  {id:'8rkA2bXmnglhr5uuIRw4', name:'A-GameExpert, LLC', active:true},
-  {id:'aedkYILyKtLjvYZCZLI', name:"A.J.LAMAR JR's Account", active:true},
-  {id:'6XNFQkDBv5GJY8ByGhuY', name:"Aaliyah Ross's Account", active:true},
-  {id:'LqrmGM5RA4WpFzAA9IJu', name:"Aaron W. Cogborn's Account", active:true},
-  {id:'qCtNlJ4Nt2ayIzsIfu08Q', name:"Abi Danielle's Account", active:true},
-];
+// Sub-accounts loaded from GHL parent window
+var subAccounts = [];
+
+// Listen for sub-account data from loader.js
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'cliqlabs-load-accounts') {
+    subAccounts = e.data.accounts;
+    renderTable(subAccounts);
+  }
+  if (e.data && e.data.type === 'cliqlabs-apply-theme') {
+    applyThemeCSS(e.data.settings);
+  }
+});
+
+// Request sub-accounts from parent GHL
+window.parent.postMessage({ type: 'cliqlabs-get-accounts' }, '*');
+
+// Show loading state while waiting
+document.getElementById('tableBody').innerHTML = `
+  <tr>
+    <td colspan="11" style="text-align:center; padding:40px; color:#888;">
+      <div style="font-size:32px; margin-bottom:12px;">⚡</div>
+      <div style="font-size:15px; font-weight:600; color:#333;">Loading your sub-accounts...</div>
+      <div style="font-size:12px; margin-top:6px;">Make sure CliqLabs is opened from inside GHL</div>
+    </td>
+  </tr>
+`;
 
 function renderTable(accounts) {
   var tbody = document.getElementById('tableBody');
