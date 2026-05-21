@@ -3,227 +3,90 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>TheCliqLabs — Theme Builder</title>
+<title>TheCliqLabs — GHL Theme Builder</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:Inter,Arial,sans-serif;
-  background:#f4f6f9;
-  min-height:100vh;
-  color:#111;
-}
+body{font-family:Inter,Arial,sans-serif;background:#f4f6f9;min-height:100vh;color:#111;}
 
-/* TOP BAR */
-.topbar{
-  background:#1a1a2e;
-  padding:0 28px;
-  height:58px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.logo{font-size:22px;font-weight:900;font-family:Arial Black,sans-serif;color:white;}
+/* TOPBAR */
+.topbar{background:#1a1a2e;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:900;font-family:Arial Black,sans-serif;color:white;}
 .logo span{color:#673de6;}
-.topbar-right{display:flex;align-items:center;gap:14px;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
 .version{color:rgba(255,255,255,0.3);font-size:12px;}
-.upgrade-btn{
-  background:#673de6;color:white;border:none;
-  padding:8px 20px;border-radius:6px;
-  font-size:13px;font-weight:700;cursor:pointer;
-}
+.upgrade-btn{background:#673de6;color:white;border:none;padding:7px 18px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
 .upgrade-btn:hover{background:#5a32c7;}
 
 /* HERO */
-.hero{
-  background:linear-gradient(135deg,#1a1a2e 0%,#2d1b69 100%);
-  padding:40px 28px;
-  text-align:center;
-  color:white;
-}
-.hero h1{
-  font-size:28px;font-weight:900;
-  font-family:Arial Black,sans-serif;
-  margin-bottom:8px;
-}
+.hero{background:linear-gradient(135deg,#1a1a2e 0%,#2d1b69 100%);padding:36px 28px;text-align:center;color:white;}
+.hero h1{font-size:26px;font-weight:900;font-family:Arial Black,sans-serif;margin-bottom:6px;}
 .hero h1 span{color:#673de6;}
-.hero p{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:6px;}
+.hero p{font-size:14px;color:rgba(255,255,255,0.55);}
 
 /* MAIN */
-.main{max-width:1000px;margin:0 auto;padding:32px 24px;}
+.main{max-width:960px;margin:0 auto;padding:28px 20px 60px;}
 
-/* SECTION */
-.section-label{
-  font-size:11px;font-weight:800;
-  color:#888;text-transform:uppercase;
-  letter-spacing:1px;margin-bottom:14px;
-  margin-top:32px;
-}
-.section-label:first-child{margin-top:0;}
+/* SECTION LABEL */
+.slabel{font-size:11px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;margin-top:28px;}
+.slabel:first-child{margin-top:0;}
 
 /* THEME GRID */
-.themes-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  margin-bottom:8px;
-}
-@media(max-width:600px){.themes-grid{grid-template-columns:1fr 1fr;}}
+.themes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:580px){.themes-grid{grid-template-columns:1fr 1fr;}}
 
-.theme-card{
-  border-radius:10px;
-  overflow:hidden;
-  border:2px solid #e5e7eb;
-  cursor:pointer;
-  transition:all 0.2s;
-  background:white;
-}
-.theme-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1);}
-.theme-card.selected{
-  border-color:#673de6;
-  box-shadow:0 0 0 3px rgba(103,61,230,0.2);
-}
-.theme-preview{height:72px;display:flex;}
-.theme-sidebar{width:28%;height:100%;}
-.theme-content{
-  flex:1;padding:8px;
-  display:flex;flex-direction:column;gap:5px;
-}
-.theme-bar{height:7px;border-radius:4px;background:#e5e7eb;}
-.theme-name{
-  padding:9px 12px;
-  font-size:13px;font-weight:700;
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid #f0f0f0;
-}
-.selected-badge{
-  background:#673de6;color:white;
-  font-size:10px;font-weight:700;
-  padding:2px 8px;border-radius:3px;
-}
+.theme-card{border-radius:10px;overflow:hidden;border:2px solid #e5e7eb;cursor:pointer;transition:all 0.2s;background:white;}
+.theme-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.1);border-color:#673de6;}
+.theme-card.selected{border-color:#673de6;box-shadow:0 0 0 3px rgba(103,61,230,0.2);}
+.tp{height:68px;display:flex;}
+.tp-sb{width:28%;height:100%;}
+.tp-ct{flex:1;padding:8px;display:flex;flex-direction:column;gap:5px;}
+.tp-bar{height:6px;border-radius:3px;background:#e5e7eb;}
+.tn{padding:8px 12px;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f0f0f0;}
+.sel-badge{background:#673de6;color:white;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;}
 
-/* CUSTOM COLORS */
-.colors-card{
-  background:white;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-  padding:20px;
-}
-.color-row{
-  display:flex;align-items:center;
-  padding:11px 0;
-  border-bottom:1px solid #f4f4f4;
-  gap:12px;
-}
-.color-row:last-child{border-bottom:none;}
-.color-label{flex:1;font-size:13.5px;font-weight:500;color:#333;}
-.color-desc{font-size:11px;color:#aaa;margin-top:2px;}
-.color-inputs{display:flex;align-items:center;gap:8px;}
-input[type="color"]{
-  width:32px;height:32px;
-  border:2px solid #e5e7eb;
-  border-radius:6px;
-  cursor:pointer;padding:0;
-  background:none;
-}
-.hex-field{
-  width:88px;
-  border:1px solid #e5e7eb;
-  border-radius:6px;
-  padding:6px 10px;
-  font-size:12.5px;
-  font-family:monospace;
-  color:#333;
-}
-.hex-field:focus{outline:none;border-color:#673de6;}
+/* COLOR CARD */
+.color-card{background:white;border-radius:10px;border:1px solid #e5e7eb;padding:20px;}
+.cr{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid #f4f4f4;gap:12px;}
+.cr:last-child{border-bottom:none;}
+.cl{flex:1;}
+.cl-name{font-size:13.5px;font-weight:500;color:#333;}
+.cl-desc{font-size:11px;color:#aaa;margin-top:2px;}
+.ci{display:flex;align-items:center;gap:8px;}
+input[type="color"]{width:32px;height:32px;border:2px solid #e5e7eb;border-radius:6px;cursor:pointer;padding:0;}
+.hf{width:88px;border:1px solid #e5e7eb;border-radius:6px;padding:6px 10px;font-size:12px;font-family:monospace;color:#333;}
+.hf:focus{outline:none;border-color:#673de6;}
 
-/* SAVE BTN */
-.save-section{
-  margin-top:28px;
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-.save-btn{
-  background:#673de6;
-  color:white;border:none;
-  padding:14px 32px;
-  border-radius:8px;
-  font-size:15px;font-weight:700;
-  cursor:pointer;
-  transition:background 0.2s;
-  display:flex;align-items:center;gap:8px;
-}
+/* OUTPUT CODE BOX */
+.output-card{background:white;border-radius:10px;border:1px solid #e5e7eb;padding:20px;}
+.output-label{font-size:13px;font-weight:700;color:#333;margin-bottom:10px;}
+.code-area{background:#1a1a2e;border-radius:8px;padding:16px;font-family:monospace;font-size:12px;color:#a78bfa;line-height:1.6;overflow-x:auto;white-space:pre;word-break:break-all;max-height:200px;overflow-y:auto;}
+.code-actions{display:flex;gap:8px;margin-top:12px;}
+.copy-btn{background:#673de6;color:white;border:none;padding:8px 20px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
+.copy-btn:hover{background:#5a32c7;}
+.copy-btn.copied{background:#16a34a;}
+
+/* SAVE SECTION */
+.save-section{margin-top:24px;display:flex;gap:10px;align-items:center;}
+.save-btn{background:#673de6;color:white;border:none;padding:13px 30px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;}
 .save-btn:hover{background:#5a32c7;}
-.reset-btn{
-  background:white;color:#666;
-  border:1px solid #ddd;
-  padding:14px 20px;
-  border-radius:8px;
-  font-size:14px;font-weight:600;
-  cursor:pointer;
-}
+.reset-btn{background:white;color:#666;border:1px solid #ddd;padding:13px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
 .reset-btn:hover{background:#f9fafb;}
 
 /* SUCCESS */
-.success-banner{
-  display:none;
-  background:#f0fdf4;
-  border:1px solid #86efac;
-  border-radius:8px;
-  padding:14px 18px;
-  margin-top:16px;
-  color:#166534;
-  font-size:14px;
-  font-weight:600;
-  align-items:center;
-  gap:8px;
-}
-.success-banner.show{display:flex;}
+.success{display:none;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;margin-top:14px;color:#166534;font-size:13.5px;font-weight:600;align-items:center;gap:8px;}
+.success.show{display:flex;}
 
-/* INSTALL SECTION */
-.install-card{
-  background:white;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-  padding:20px;
-}
-.install-step{
-  display:flex;gap:14px;
-  padding:12px 0;
-  border-bottom:1px solid #f4f4f4;
-  align-items:flex-start;
-}
-.install-step:last-child{border-bottom:none;}
-.step-num{
-  width:26px;height:26px;min-width:26px;
-  background:#673de6;color:white;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;
-}
-.step-text{font-size:13.5px;color:#333;line-height:1.5;}
+/* INSTALL CARD */
+.install-card{background:white;border-radius:10px;border:1px solid #e5e7eb;padding:20px;}
+.step{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f4f4f4;align-items:flex-start;}
+.step:last-child{border-bottom:none;}
+.step-num{width:24px;height:24px;min-width:24px;background:#673de6;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+.step-text{font-size:13px;color:#333;line-height:1.55;}
 .step-text b{color:#111;}
-.code-block{
-  background:#1a1a2e;
-  color:#a78bfa;
-  padding:10px 14px;
-  border-radius:6px;
-  font-size:12.5px;
-  font-family:monospace;
-  margin-top:8px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-.copy-btn{
-  background:#673de6;color:white;
-  border:none;padding:4px 12px;
-  border-radius:4px;font-size:11px;
-  font-weight:700;cursor:pointer;
-  white-space:nowrap;
-}
-.copy-btn:hover{background:#5a32c7;}
+.code-inline{background:#1a1a2e;color:#a78bfa;padding:8px 12px;border-radius:5px;font-size:11.5px;font-family:monospace;margin-top:7px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.code-inline span{word-break:break-all;}
+.mini-copy{background:#673de6;color:white;border:none;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.mini-copy:hover{background:#5a32c7;}
 </style>
 </head>
 <body>
@@ -240,333 +103,362 @@ input[type="color"]{
 <!-- HERO -->
 <div class="hero">
   <h1>GHL <span>Theme</span> Builder</h1>
-  <p>Pick a theme or customize your own colors — applied instantly to your GHL</p>
+  <p>Pick a theme or customize colors — generates your CSS code instantly</p>
 </div>
 
 <!-- MAIN -->
 <div class="main">
 
-  <!-- THEMES -->
-  <div class="section-label">Choose a Theme</div>
+  <!-- STEP 1: PICK THEME -->
+  <div class="slabel">Step 1 — Choose a Theme</div>
   <div class="themes-grid">
 
     <div class="theme-card" onclick="selectTheme(this,'dark-purple')" data-theme="dark-purple">
-      <div class="theme-preview">
-        <div class="theme-sidebar" style="background:#1a1a2e;"></div>
-        <div class="theme-content" style="background:#f4f6f9;">
-          <div class="theme-bar" style="background:#673de6;width:70%;"></div>
-          <div class="theme-bar" style="width:90%;"></div>
-          <div class="theme-bar" style="width:55%;"></div>
+      <div class="tp">
+        <div class="tp-sb" style="background:#1a1a2e;"></div>
+        <div class="tp-ct" style="background:#f4f6f9;">
+          <div class="tp-bar" style="background:#673de6;width:65%;"></div>
+          <div class="tp-bar" style="width:90%;"></div>
+          <div class="tp-bar" style="width:55%;"></div>
         </div>
       </div>
-      <div class="theme-name">Dark Purple</div>
+      <div class="tn">Dark Purple</div>
     </div>
 
     <div class="theme-card" onclick="selectTheme(this,'dark-green')" data-theme="dark-green">
-      <div class="theme-preview">
-        <div class="theme-sidebar" style="background:#000000;"></div>
-        <div class="theme-content" style="background:#f4f6f9;">
-          <div class="theme-bar" style="background:#5fc800;width:70%;"></div>
-          <div class="theme-bar" style="width:90%;"></div>
-          <div class="theme-bar" style="width:55%;"></div>
+      <div class="tp">
+        <div class="tp-sb" style="background:#000000;"></div>
+        <div class="tp-ct" style="background:#f4f6f9;">
+          <div class="tp-bar" style="background:#5fc800;width:65%;"></div>
+          <div class="tp-bar" style="width:90%;"></div>
+          <div class="tp-bar" style="width:55%;"></div>
         </div>
       </div>
-      <div class="theme-name">Dark Green</div>
+      <div class="tn">Dark Green</div>
     </div>
 
     <div class="theme-card" onclick="selectTheme(this,'midnight-blue')" data-theme="midnight-blue">
-      <div class="theme-preview">
-        <div class="theme-sidebar" style="background:#0f172a;"></div>
-        <div class="theme-content" style="background:#f4f6f9;">
-          <div class="theme-bar" style="background:#3b82f6;width:70%;"></div>
-          <div class="theme-bar" style="width:90%;"></div>
-          <div class="theme-bar" style="width:55%;"></div>
+      <div class="tp">
+        <div class="tp-sb" style="background:#0f172a;"></div>
+        <div class="tp-ct" style="background:#f4f6f9;">
+          <div class="tp-bar" style="background:#3b82f6;width:65%;"></div>
+          <div class="tp-bar" style="width:90%;"></div>
+          <div class="tp-bar" style="width:55%;"></div>
         </div>
       </div>
-      <div class="theme-name">Midnight Blue</div>
+      <div class="tn">Midnight Blue</div>
     </div>
 
     <div class="theme-card" onclick="selectTheme(this,'clean-white')" data-theme="clean-white">
-      <div class="theme-preview">
-        <div class="theme-sidebar" style="background:#f8f9fa;border-right:1px solid #e5e7eb;"></div>
-        <div class="theme-content" style="background:#ffffff;">
-          <div class="theme-bar" style="background:#6366f1;width:70%;"></div>
-          <div class="theme-bar" style="width:90%;"></div>
-          <div class="theme-bar" style="width:55%;"></div>
+      <div class="tp">
+        <div class="tp-sb" style="background:#f8f9fa;border-right:1px solid #ddd;"></div>
+        <div class="tp-ct" style="background:#fff;">
+          <div class="tp-bar" style="background:#6366f1;width:65%;"></div>
+          <div class="tp-bar" style="width:90%;"></div>
+          <div class="tp-bar" style="width:55%;"></div>
         </div>
       </div>
-      <div class="theme-name">Clean White</div>
+      <div class="tn">Clean White</div>
     </div>
 
     <div class="theme-card" onclick="selectTheme(this,'crimson')" data-theme="crimson">
-      <div class="theme-preview">
-        <div class="theme-sidebar" style="background:#1a0000;"></div>
-        <div class="theme-content" style="background:#fff5f5;">
-          <div class="theme-bar" style="background:#dc2626;width:70%;"></div>
-          <div class="theme-bar" style="width:90%;"></div>
-          <div class="theme-bar" style="width:55%;"></div>
+      <div class="tp">
+        <div class="tp-sb" style="background:#1a0000;"></div>
+        <div class="tp-ct" style="background:#fff5f5;">
+          <div class="tp-bar" style="background:#dc2626;width:65%;"></div>
+          <div class="tp-bar" style="width:90%;"></div>
+          <div class="tp-bar" style="width:55%;"></div>
         </div>
       </div>
-      <div class="theme-name">Crimson</div>
+      <div class="tn">Crimson</div>
     </div>
 
-    <div class="theme-card" onclick="selectTheme(this,'custom')" data-theme="custom" id="custom-card">
-      <div class="theme-preview">
-        <div class="theme-sidebar" id="custom-preview-sidebar" style="background:#1a1a2e;"></div>
-        <div class="theme-content" style="background:#f4f6f9;">
-          <div class="theme-bar" id="custom-preview-bar" style="background:#673de6;width:70%;"></div>
-          <div class="theme-bar" style="width:90%;"></div>
-          <div class="theme-bar" style="width:55%;"></div>
+    <div class="theme-card" onclick="selectTheme(this,'custom')" data-theme="custom">
+      <div class="tp">
+        <div class="tp-sb" id="prev-sb" style="background:#1a1a2e;"></div>
+        <div class="tp-ct" style="background:#f4f6f9;">
+          <div class="tp-bar" id="prev-bar" style="background:#673de6;width:65%;"></div>
+          <div class="tp-bar" style="width:90%;"></div>
+          <div class="tp-bar" style="width:55%;"></div>
         </div>
       </div>
-      <div class="theme-name">✏️ Custom</div>
+      <div class="tn">✏️ Custom</div>
     </div>
 
   </div>
 
-  <!-- CUSTOM COLORS -->
-  <div class="section-label" style="margin-top:28px;">Customize Colors</div>
-  <div class="colors-card">
+  <!-- STEP 2: CUSTOMIZE -->
+  <div class="slabel" style="margin-top:24px;">Step 2 — Customize Colors</div>
+  <div class="color-card">
 
-    <div class="color-row">
-      <div style="flex:1;">
-        <div class="color-label">Primary Color</div>
-        <div class="color-desc">Buttons, active tabs, highlights, links</div>
-      </div>
-      <div class="color-inputs">
-        <input type="color" id="color-primary" value="#673de6"
-          oninput="syncHex('color-primary','hex-primary');updateCustomPreview()">
-        <input type="text" id="hex-primary" class="hex-field" value="#673de6"
-          oninput="syncColor('hex-primary','color-primary');updateCustomPreview()">
+    <div class="cr">
+      <div class="cl"><div class="cl-name">Primary Color</div><div class="cl-desc">Buttons, active tabs, highlights, links</div></div>
+      <div class="ci">
+        <input type="color" id="c-primary" value="#673de6" oninput="syncH('c-primary','h-primary');updatePreview();generateCode();">
+        <input type="text" id="h-primary" class="hf" value="#673de6" oninput="syncC('h-primary','c-primary');updatePreview();generateCode();">
       </div>
     </div>
 
-    <div class="color-row">
-      <div style="flex:1;">
-        <div class="color-label">Sidebar Background</div>
-        <div class="color-desc">Left navigation sidebar color</div>
-      </div>
-      <div class="color-inputs">
-        <input type="color" id="color-sidebar" value="#1a1a2e"
-          oninput="syncHex('color-sidebar','hex-sidebar');updateCustomPreview()">
-        <input type="text" id="hex-sidebar" class="hex-field" value="#1a1a2e"
-          oninput="syncColor('hex-sidebar','color-sidebar');updateCustomPreview()">
+    <div class="cr">
+      <div class="cl"><div class="cl-name">Sidebar Background</div><div class="cl-desc">Left navigation sidebar color</div></div>
+      <div class="ci">
+        <input type="color" id="c-sidebar" value="#1a1a2e" oninput="syncH('c-sidebar','h-sidebar');updatePreview();generateCode();">
+        <input type="text" id="h-sidebar" class="hf" value="#1a1a2e" oninput="syncC('h-sidebar','c-sidebar');updatePreview();generateCode();">
       </div>
     </div>
 
-    <div class="color-row">
-      <div style="flex:1;">
-        <div class="color-label">Sidebar Icon & Text Color</div>
-        <div class="color-desc">Navigation text and icon color</div>
-      </div>
-      <div class="color-inputs">
-        <input type="color" id="color-icons" value="#ffffff"
-          oninput="syncHex('color-icons','hex-icons')">
-        <input type="text" id="hex-icons" class="hex-field" value="#ffffff"
-          oninput="syncColor('hex-icons','color-icons')">
+    <div class="cr">
+      <div class="cl"><div class="cl-name">Sidebar Text & Icon Color</div><div class="cl-desc">Navigation text and icon color</div></div>
+      <div class="ci">
+        <input type="color" id="c-icons" value="#ffffff" oninput="syncH('c-icons','h-icons');generateCode();">
+        <input type="text" id="h-icons" class="hf" value="#ffffff" oninput="syncC('h-icons','c-icons');generateCode();">
       </div>
     </div>
 
-    <div class="color-row">
-      <div style="flex:1;">
-        <div class="color-label">Header Background</div>
-        <div class="color-desc">Top header bar color</div>
+    <div class="cr">
+      <div class="cl"><div class="cl-name">Header Background</div><div class="cl-desc">Top header bar color</div></div>
+      <div class="ci">
+        <input type="color" id="c-header" value="#ffffff" oninput="syncH('c-header','h-header');generateCode();">
+        <input type="text" id="h-header" class="hf" value="#ffffff" oninput="syncC('h-header','c-header');generateCode();">
       </div>
-      <div class="color-inputs">
-        <input type="color" id="color-header" value="#ffffff"
-          oninput="syncHex('color-header','hex-header')">
-        <input type="text" id="hex-header" class="hex-field" value="#ffffff"
-          oninput="syncColor('hex-header','color-header')">
+    </div>
+
+    <div class="cr">
+      <div class="cl"><div class="cl-name">Card Header Background</div><div class="cl-desc">Dashboard widget card header color</div></div>
+      <div class="ci">
+        <input type="color" id="c-card" value="#f8f9fa" oninput="syncH('c-card','h-card');generateCode();">
+        <input type="text" id="h-card" class="hf" value="#f8f9fa" oninput="syncC('h-card','c-card');generateCode();">
       </div>
     </div>
 
   </div>
 
-  <!-- SAVE -->
-  <div class="save-section">
-    <button class="save-btn" onclick="saveTheme()">
-      💾 Save & Apply Theme
-    </button>
-    <button class="reset-btn" onclick="resetTheme()">Reset to Default</button>
-  </div>
-
-  <div class="success-banner" id="success-banner">
-    ✅ Theme saved! Go back to GHL and refresh the page to see your changes.
+  <!-- STEP 3: GET CODE -->
+  <div class="slabel" style="margin-top:24px;">Step 3 — Copy Your CSS Code</div>
+  <div class="output-card">
+    <div class="output-label">Paste this into GHL → Settings → Company → Custom CSS:</div>
+    <div class="code-area" id="css-output">/* Select a theme above to generate your CSS code */</div>
+    <div class="code-actions">
+      <button class="copy-btn" id="copy-css-btn" onclick="copyCSSCode()">📋 Copy CSS Code</button>
+      <button class="reset-btn" onclick="resetAll()">Reset</button>
+    </div>
+    <div class="success" id="success-css">✅ CSS code copied! Now paste it into GHL Custom CSS and save.</div>
   </div>
 
   <!-- INSTALL -->
-  <div class="section-label" style="margin-top:40px;">Installation</div>
+  <div class="slabel" style="margin-top:32px;">Installation Guide</div>
   <div class="install-card">
-    <div class="install-step">
+
+    <div class="step">
       <div class="step-num">1</div>
       <div class="step-text">
-        Go to <b>GHL Agency Settings → Company → Custom JS</b>
-      </div>
-    </div>
-    <div class="install-step">
-      <div class="step-num">2</div>
-      <div class="step-text">
-        Paste this script tag and click Save:
-        <div class="code-block">
-          <span id="script-tag">&lt;script src="https://cdn.thecliqlabs.com/loader.js"&gt;&lt;/script&gt;</span>
-          <button class="copy-btn" onclick="copyScript()">Copy</button>
+        Go to <b>GHL Agency Settings → Company → Custom JS</b> and paste this — adds CliqLabs to your sidebar:
+        <div class="code-inline">
+          <span>&lt;script src="https://cdn.thecliqlabs.com/loader.js"&gt;&lt;/script&gt;</span>
+          <button class="mini-copy" onclick="copyJS()">Copy</button>
         </div>
       </div>
     </div>
-    <div class="install-step">
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        Go to <b>GHL Agency Settings → Company → Custom CSS</b> and paste the CSS code from Step 3 above.
+      </div>
+    </div>
+
+    <div class="step">
       <div class="step-num">3</div>
       <div class="step-text">
-        <b>Refresh GHL</b> — CliqLabs will appear in your sidebar instantly!
+        Click <b>Save Changes</b> then <b>hard refresh</b> GHL (<b>Ctrl+Shift+R</b> or <b>Cmd+Shift+R</b>).
       </div>
     </div>
-    <div class="install-step">
+
+    <div class="step">
       <div class="step-num">4</div>
       <div class="step-text">
-        Come back here, pick your theme, click <b>Save & Apply</b> — done! ✅
+        ✅ Your GHL is now branded! Come back here anytime to change your theme.
       </div>
     </div>
+
   </div>
 
-</div><!-- end main -->
+</div>
 
 <script>
 // THEME PRESETS
 var presets = {
-  'dark-purple':   {primary:'#673de6', sidebar:'#1a1a2e', icons:'#ffffff', header:'#ffffff'},
-  'dark-green':    {primary:'#5fc800', sidebar:'#000000', icons:'#ffffff', header:'#ffffff'},
-  'midnight-blue': {primary:'#3b82f6', sidebar:'#0f172a', icons:'#ffffff', header:'#ffffff'},
-  'clean-white':   {primary:'#6366f1', sidebar:'#f8f9fa', icons:'#333333', header:'#ffffff'},
-  'crimson':       {primary:'#dc2626', sidebar:'#1a0000', icons:'#ffffff', header:'#ffffff'},
+  'dark-purple':   {primary:'#673de6', sidebar:'#1a1a2e', icons:'#ffffff', header:'#ffffff', card:'#f8f9fa'},
+  'dark-green':    {primary:'#5fc800', sidebar:'#000000', icons:'#ffffff', header:'#ffffff', card:'#f8f9fa'},
+  'midnight-blue': {primary:'#3b82f6', sidebar:'#0f172a', icons:'#ffffff', header:'#ffffff', card:'#f8f9fa'},
+  'clean-white':   {primary:'#6366f1', sidebar:'#f8f9fa', icons:'#333333', header:'#ffffff', card:'#ebebeb'},
+  'crimson':       {primary:'#dc2626', sidebar:'#1a0000', icons:'#ffffff', header:'#ffffff', card:'#fff5f5'},
   'custom':        null
 };
 
 var selectedTheme = null;
 
 function selectTheme(card, name) {
-  // Remove selected from all
   document.querySelectorAll('.theme-card').forEach(function(c) {
     c.classList.remove('selected');
-    var badge = c.querySelector('.selected-badge');
-    if (badge) badge.remove();
-    var nameEl = c.querySelector('.theme-name');
-    if (nameEl) nameEl.style.background = '';
+    var tn = c.querySelector('.tn');
+    var badge = tn.querySelector('.sel-badge');
+    if (badge) tn.removeChild(badge);
   });
-
-  // Select this card
   card.classList.add('selected');
-  var nameEl = card.querySelector('.theme-name');
-  nameEl.innerHTML = nameEl.textContent + '<span class="selected-badge">SELECTED</span>';
+  var tn = card.querySelector('.tn');
+  var badge = document.createElement('span');
+  badge.className = 'sel-badge';
+  badge.textContent = 'SELECTED';
+  tn.appendChild(badge);
   selectedTheme = name;
 
-  // Apply preset colors to inputs
-  var preset = presets[name];
-  if (preset) {
-    document.getElementById('color-primary').value = preset.primary;
-    document.getElementById('hex-primary').value   = preset.primary;
-    document.getElementById('color-sidebar').value = preset.sidebar;
-    document.getElementById('hex-sidebar').value   = preset.sidebar;
-    document.getElementById('color-icons').value   = preset.icons;
-    document.getElementById('hex-icons').value     = preset.icons;
-    document.getElementById('color-header').value  = preset.header;
-    document.getElementById('hex-header').value    = preset.header;
-    updateCustomPreview();
+  var p = presets[name];
+  if (p) {
+    set('c-primary','h-primary',p.primary);
+    set('c-sidebar','h-sidebar',p.sidebar);
+    set('c-icons','h-icons',p.icons);
+    set('c-header','h-header',p.header);
+    set('c-card','h-card',p.card);
+    updatePreview();
+    generateCode();
   }
 }
 
-// SYNC COLOR PICKER ↔ HEX INPUT
-function syncHex(colorId, hexId) {
-  document.getElementById(hexId).value = document.getElementById(colorId).value;
-}
-function syncColor(hexId, colorId) {
-  var val = document.getElementById(hexId).value;
-  if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
-    document.getElementById(colorId).value = val;
-  }
+function set(cid,hid,val) {
+  document.getElementById(cid).value = val;
+  document.getElementById(hid).value = val;
 }
 
-// UPDATE CUSTOM PREVIEW CARD
-function updateCustomPreview() {
-  var primary = document.getElementById('color-primary').value;
-  var sidebar = document.getElementById('color-sidebar').value;
-  document.getElementById('custom-preview-sidebar').style.background = sidebar;
-  document.getElementById('custom-preview-bar').style.background = primary;
+function syncH(cid,hid) { document.getElementById(hid).value = document.getElementById(cid).value; }
+function syncC(hid,cid) { var v=document.getElementById(hid).value; if(/^#[0-9A-Fa-f]{6}$/.test(v)) document.getElementById(cid).value=v; }
+
+function updatePreview() {
+  document.getElementById('prev-sb').style.background = document.getElementById('c-sidebar').value;
+  document.getElementById('prev-bar').style.background = document.getElementById('c-primary').value;
 }
 
-// SAVE THEME
-function saveTheme() {
-  var settings = {
-    primary: document.getElementById('color-primary').value,
-    sidebar: document.getElementById('color-sidebar').value,
-    icons:   document.getElementById('color-icons').value,
-    header:  document.getElementById('color-header').value,
-    theme:   selectedTheme || 'custom'
-  };
+function generateCode() {
+  var primary = document.getElementById('c-primary').value;
+  var sidebar = document.getElementById('c-sidebar').value;
+  var icons   = document.getElementById('c-icons').value;
+  var header  = document.getElementById('c-header').value;
+  var card    = document.getElementById('c-card').value;
 
-  // Save to localStorage
-  localStorage.setItem('cliqlabs_theme', JSON.stringify(settings));
+  // Calculate hover (darken primary by ~15%)
+  var hover = darkenHex(primary, 20);
+  var light = hexToRgba(primary, 0.15);
 
-  // Send to GHL parent window if opened from GHL
-  if (window.opener) {
-    window.opener.postMessage({type:'cliqlabs-save-theme', settings:settings}, '*');
-  }
-  window.parent.postMessage({type:'cliqlabs-save-theme', settings:settings}, '*');
+  var code = '@import url(\'https://cdn.thecliqlabs.com/theme.css\');\n\n'
+    + ':root {\n'
+    + '  --cliq-primary: ' + primary + ';\n'
+    + '  --cliq-primary-hover: ' + hover + ';\n'
+    + '  --cliq-primary-light: ' + light + ';\n'
+    + '  --cliq-sidebar-bg: ' + sidebar + ';\n'
+    + '  --cliq-sidebar-text: ' + icons + ';\n'
+    + '  --cliq-sidebar-icon: ' + icons + ';\n'
+    + '  --cliq-sidebar-hover: ' + hexToRgba(primary, 0.2) + ';\n'
+    + '  --cliq-sidebar-active: ' + hexToRgba(primary, 0.25) + ';\n'
+    + '  --cliq-header-bg: ' + header + ';\n'
+    + '  --cliq-card-header-bg: ' + card + ';\n'
+    + '  --cliq-card-header-text: #111111;\n'
+    + '  --cliq-button-bg: ' + primary + ';\n'
+    + '  --cliq-button-text: #ffffff;\n'
+    + '  --cliq-switcher-bg: rgba(255,255,255,0.08);\n'
+    + '  --cliq-divider: rgba(255,255,255,0.08);\n'
+    + '  --tw-ring-color: ' + primary + ' !important;\n'
+    + '  --nav-menus-background-color: ' + sidebar + ' !important;\n'
+    + '  --nav-menu-text-color: ' + icons + ' !important;\n'
+    + '  --nav-menu-icon-color: ' + icons + ' !important;\n'
+    + '  --nav-hover-background-color: ' + hexToRgba(primary,0.25) + ' !important;\n'
+    + '  --location-switcher-background-color: rgba(255,255,255,0.08) !important;\n'
+    + '  --card-header-background-color: ' + card + ' !important;\n'
+    + '  --card-header-text-color: #111111 !important;\n'
+    + '  --button-background-color: ' + primary + ' !important;\n'
+    + '  --button-text-color: #ffffff !important;\n'
+    + '}';
 
-  // Show success
-  var banner = document.getElementById('success-banner');
-  banner.classList.add('show');
-  setTimeout(function() { banner.classList.remove('show'); }, 5000);
+  document.getElementById('css-output').textContent = code;
 }
 
-// RESET
-function resetTheme() {
-  localStorage.removeItem('cliqlabs_theme');
-  if (window.opener) {
-    window.opener.postMessage({type:'cliqlabs-save-theme', settings:{}}, '*');
-  }
-  document.querySelectorAll('.theme-card').forEach(function(c) { c.classList.remove('selected'); });
-  selectedTheme = null;
-  alert('Theme reset! Refresh GHL to restore default.');
+// Darken hex color
+function darkenHex(hex, amount) {
+  var r = parseInt(hex.slice(1,3),16);
+  var g = parseInt(hex.slice(3,5),16);
+  var b = parseInt(hex.slice(5,7),16);
+  r = Math.max(0, r - amount);
+  g = Math.max(0, g - amount);
+  b = Math.max(0, b - amount);
+  return '#' + [r,g,b].map(function(v){return v.toString(16).padStart(2,'0');}).join('');
 }
 
-// COPY SCRIPT
-function copyScript() {
-  var text = '<script src="https://cdn.thecliqlabs.com/loader.js"><\/script>';
-  navigator.clipboard.writeText(text).then(function() {
-    var btn = document.querySelector('.copy-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+// Hex to rgba
+function hexToRgba(hex, alpha) {
+  var r = parseInt(hex.slice(1,3),16);
+  var g = parseInt(hex.slice(3,5),16);
+  var b = parseInt(hex.slice(5,7),16);
+  return 'rgba('+r+','+g+','+b+','+alpha+')';
+}
+
+// Copy CSS
+function copyCSSCode() {
+  var code = document.getElementById('css-output').textContent;
+  if (code.includes('Select a theme')) { alert('Please select a theme first!'); return; }
+  navigator.clipboard.writeText(code).then(function() {
+    var btn = document.getElementById('copy-css-btn');
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    document.getElementById('success-css').classList.add('show');
+    setTimeout(function() {
+      btn.textContent = '📋 Copy CSS Code';
+      btn.classList.remove('copied');
+      document.getElementById('success-css').classList.remove('show');
+    }, 4000);
   });
 }
 
-// LOAD SAVED SETTINGS ON OPEN
+// Copy JS
+function copyJS() {
+  var code = '<script src="https://cdn.thecliqlabs.com/loader.js"><\/script>';
+  navigator.clipboard.writeText(code).then(function() {
+    event.target.textContent = 'Copied!';
+    setTimeout(function() { event.target.textContent = 'Copy'; }, 2000);
+  });
+}
+
+// Reset
+function resetAll() {
+  document.querySelectorAll('.theme-card').forEach(function(c) {
+    c.classList.remove('selected');
+    var tn = c.querySelector('.tn');
+    var badge = tn.querySelector('.sel-badge');
+    if (badge) tn.removeChild(badge);
+  });
+  selectedTheme = null;
+  document.getElementById('css-output').textContent = '/* Select a theme above to generate your CSS code */';
+}
+
+// Load saved on open
 window.addEventListener('load', function() {
   var saved = localStorage.getItem('cliqlabs_theme');
   if (saved) {
     try {
       var s = JSON.parse(saved);
-      if (s.primary) {
-        document.getElementById('color-primary').value = s.primary;
-        document.getElementById('hex-primary').value   = s.primary;
-      }
-      if (s.sidebar) {
-        document.getElementById('color-sidebar').value = s.sidebar;
-        document.getElementById('hex-sidebar').value   = s.sidebar;
-      }
-      if (s.icons) {
-        document.getElementById('color-icons').value = s.icons;
-        document.getElementById('hex-icons').value   = s.icons;
-      }
-      if (s.header) {
-        document.getElementById('color-header').value = s.header;
-        document.getElementById('hex-header').value   = s.header;
-      }
-      // Highlight saved theme card
+      if (s.primary) set('c-primary','h-primary',s.primary);
+      if (s.sidebar) set('c-sidebar','h-sidebar',s.sidebar);
+      if (s.icons)   set('c-icons','h-icons',s.icons);
+      if (s.header)  set('c-header','h-header',s.header);
+      if (s.card)    set('c-card','h-card',s.card);
       if (s.theme) {
         var card = document.querySelector('[data-theme="'+s.theme+'"]');
         if (card) selectTheme(card, s.theme);
       }
+      updatePreview();
+      generateCode();
     } catch(e) {}
   }
+  // Auto-select dark purple as default preview
+  generateCode();
 });
 </script>
 </body>
