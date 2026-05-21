@@ -1,10 +1,11 @@
 /* ================================================
-   TheCliqLabs Loader v3.0
-   Embedded Runtime Panel Version
+   TheCliqLabs Loader v3.1
+   Fixed Sidebar Text Version
    ================================================ */
 
 /* SVG Injector */
 (function() {
+
   var script = document.createElement('script');
 
   script.src =
@@ -16,9 +17,13 @@
   script.crossOrigin = 'anonymous';
 
   document.head.appendChild(script);
+
 })();
 
-/* Re-inject SVG icons on every GHL page navigation */
+/* ================================================
+   Reinject Icons After Navigation
+   ================================================ */
+
 window.addEventListener('routeChangeEvent', function(e) {
 
   if (
@@ -45,15 +50,15 @@ window.addEventListener('routeChangeEvent', function(e) {
         SVGInjector(icon);
       });
 
-      /* Re-add CliqLabs menu after navigation */
       setTimeout(addCliqLabsMenu, 300);
     }
 
   }, 200);
+
 });
 
 /* ================================================
-   Add CliqLabs Sidebar Menu
+   Sidebar Button
    ================================================ */
 
 function addCliqLabsMenu() {
@@ -75,26 +80,31 @@ function addCliqLabsMenu() {
     'padding:8px 12px',
     'cursor:pointer',
     'text-decoration:none',
-    'opacity:0.85',
-    'transition:opacity 0.2s',
+    'opacity:0.9',
+    'transition:all 0.2s ease',
     'width:100%',
     'margin-top:5px',
-    'color:white',
-    'font-family:Inter,sans-serif'
+    'color:inherit',
+    'font-family:Inter,sans-serif',
+    'border-radius:10px'
   ].join(';');
 
   btn.innerHTML = [
-    '<span style="font-size:16px;min-width:20px;text-align:center;">⚡</span>',
-    '<span class="nav-title" style="font-size:14px;font-weight:600;">CliqLabs</span>',
-    '<span style="background:#673de6;color:white;font-size:9px;font-weight:800;padding:2px 6px;border-radius:3px;margin-left:auto;">NEW</span>'
+    '<span style="font-size:16px;min-width:20px;text-align:center;color:inherit;">⚡</span>',
+
+    '<span style="font-size:14px;font-weight:600;font-family:Inter,sans-serif;color:inherit;display:inline-block;">CliqLabs</span>',
+
+    '<span style="background:#673de6;color:white;font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:auto;">NEW</span>'
   ].join('');
 
   btn.onmouseenter = function() {
     this.style.opacity = '1';
+    this.style.background = 'rgba(255,255,255,0.08)';
   };
 
   btn.onmouseleave = function() {
-    this.style.opacity = '0.85';
+    this.style.opacity = '0.9';
+    this.style.background = 'transparent';
   };
 
   btn.onclick = function() {
@@ -105,7 +115,7 @@ function addCliqLabsMenu() {
 }
 
 /* ================================================
-   Open Embedded Panel
+   Open Panel
    ================================================ */
 
 function openCliqLabsPanel() {
@@ -121,8 +131,8 @@ function openCliqLabsPanel() {
     position:fixed;
     inset:0;
     background:rgba(0,0,0,0.45);
-    z-index:999999;
     backdrop-filter:blur(2px);
+    z-index:999999;
   `;
 
   overlay.onclick = closeCliqLabsPanel;
@@ -141,7 +151,7 @@ function openCliqLabsPanel() {
     height:100vh;
     background:#ffffff;
     z-index:1000000;
-    box-shadow:-10px 0 30px rgba(0,0,0,0.25);
+    box-shadow:-10px 0 35px rgba(0,0,0,0.25);
     overflow:hidden;
     animation:cliqSlideIn .25s ease;
     border-top-left-radius:18px;
@@ -175,9 +185,10 @@ function openCliqLabsPanel() {
         background:none;
         border:none;
         color:white;
-        font-size:26px;
+        font-size:28px;
         cursor:pointer;
       ">×</button>
+
     </div>
 
     <iframe
@@ -200,11 +211,11 @@ function openCliqLabsPanel() {
     .onclick = closeCliqLabsPanel;
 
   /* Animation */
-  if (!document.getElementById('cliqlabs-anim-style')) {
+  if (!document.getElementById('cliqlabs-animation')) {
 
     var style = document.createElement('style');
 
-    style.id = 'cliqlabs-anim-style';
+    style.id = 'cliqlabs-animation';
 
     style.innerHTML = `
       @keyframes cliqSlideIn {
@@ -237,7 +248,7 @@ function closeCliqLabsPanel() {
 }
 
 /* ================================================
-   Wait For Sidebar Then Inject
+   Init
    ================================================ */
 
 var menuInterval = setInterval(function() {
@@ -252,5 +263,7 @@ var menuInterval = setInterval(function() {
 }, 300);
 
 setTimeout(function() {
+
   clearInterval(menuInterval);
+
 }, 15000);
