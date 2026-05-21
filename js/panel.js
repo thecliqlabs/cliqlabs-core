@@ -5,37 +5,21 @@
   // Prevent duplicate panel
   if (document.getElementById("cliq-theme-panel")) return;
 
+  // PANEL
   const panel = document.createElement("div");
 
   panel.id = "cliq-theme-panel";
 
   panel.innerHTML = `
 
-  <div style="
-    position:fixed;
-    top:120px;
-    right:20px;
-    z-index:999999999;
-    background:#111;
-    border:1px solid #333;
-    border-radius:14px;
-    padding:16px;
-    width:220px;
-    box-shadow:0 0 30px rgba(0,0,0,.35);
-    font-family:Arial,sans-serif;
-  ">
+  <div class="cliq-panel-wrap">
 
-    <div style="
-      font-size:18px;
-      font-weight:700;
-      color:#8dc63f;
-      margin-bottom:14px;
-    ">
-      CLIQ Themes
+    <div class="cliq-panel-title">
+      CLIQLABS THEMES
     </div>
 
-    <button data-theme="dpc" class="cliq-btn">
-      DPC Theme
+    <button data-theme="dpc" class="cliq-btn active">
+      DPC Green Black
     </button>
 
     <button data-theme="glass" class="cliq-btn">
@@ -52,27 +36,108 @@
 
   document.body.appendChild(panel);
 
-  // BUTTON STYLES
+  // PANEL CSS
   const style = document.createElement("style");
 
   style.innerHTML = `
 
-    .cliq-btn{
-      width:100%;
-      margin-bottom:10px;
-      border:none;
-      padding:12px;
-      border-radius:10px;
-      background:#8dc63f;
-      color:#000;
+    .cliq-panel-wrap{
+
+      position:fixed;
+      top:120px;
+      right:20px;
+
+      width:240px;
+
+      background:#050505;
+
+      border:1px solid rgba(255,255,255,.08);
+
+      border-radius:18px;
+
+      padding:18px;
+
+      z-index:999999999;
+
+      box-shadow:
+      0 10px 40px rgba(0,0,0,.35);
+
+      backdrop-filter:blur(14px);
+
+      font-family:Inter,sans-serif;
+
+    }
+
+    .cliq-panel-title{
+
+      color:#8dc63f;
+
+      font-size:14px;
+
       font-weight:700;
+
+      letter-spacing:1px;
+
+      margin-bottom:16px;
+
+    }
+
+    .cliq-btn{
+
+      width:100%;
+
+      border:none;
+
+      padding:14px;
+
+      margin-bottom:12px;
+
+      border-radius:12px;
+
       cursor:pointer;
-      transition:.2s;
+
+      transition:all .25s ease;
+
+      font-weight:600;
+
+      font-size:14px;
+
+      background:#111;
+
+      color:#d7d7d7;
+
+      border:1px solid rgba(255,255,255,.05);
+
     }
 
     .cliq-btn:hover{
+
       transform:translateY(-2px);
-      opacity:.9;
+
+      background:#161616;
+
+      color:#8dc63f;
+
+      border-color:rgba(141,198,63,.35);
+
+    }
+
+    .cliq-btn.active{
+
+      background:
+      linear-gradient(
+        135deg,
+        rgba(141,198,63,.20),
+        rgba(141,198,63,.08)
+      );
+
+      color:#8dc63f;
+
+      border-color:rgba(141,198,63,.45);
+
+      box-shadow:
+      0 0 20px rgba(141,198,63,.15);
+
     }
 
   `;
@@ -84,16 +149,26 @@
 
     btn.addEventListener("click", function () {
 
+      // ACTIVE STATE
+      panel.querySelectorAll(".cliq-btn").forEach(b => {
+        b.classList.remove("active");
+      });
+
+      this.classList.add("active");
+
       const theme = this.dataset.theme;
 
+      // SAVE
       localStorage.setItem("cliq_theme", theme);
 
+      // REMOVE OLD THEME
       const oldTheme = document.getElementById("cliq-theme");
 
       if (oldTheme) {
         oldTheme.remove();
       }
 
+      // LOAD NEW THEME
       const link = document.createElement("link");
 
       link.id = "cliq-theme";
