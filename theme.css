@@ -1,120 +1,71 @@
 /* ================================================
-   TheCliqLabs — GHL Master Theme CSS
-   Version 1.0
-   Usage: @import url('https://cdn.thecliqlabs.com/theme.css');
+   TheCliqLabs — GHL Master Theme CSS v2.0
+   @import url('https://cdn.thecliqlabs.com/theme.css');
    ================================================ */
 
-/* Default variables — overridden by agency's :root */
-:root {
-  --cliq-primary: #673de6;
-  --cliq-primary-hover: #5a32c7;
-  --cliq-primary-light: rgba(103,61,230,0.15);
-  --cliq-sidebar-bg: #1a1a2e;
-  --cliq-sidebar-text: #ffffff;
-  --cliq-sidebar-icon: #ffffff;
-  --cliq-sidebar-hover: rgba(103,61,230,0.2);
-  --cliq-sidebar-active: rgba(103,61,230,0.25);
-  --cliq-header-bg: #ffffff;
-  --cliq-card-header-bg: #f8f9fa;
-  --cliq-card-header-text: #111111;
-  --cliq-button-bg: #673de6;
-  --cliq-button-text: #ffffff;
-  --cliq-switcher-bg: rgba(255,255,255,0.08);
-  --cliq-divider: rgba(255,255,255,0.08);
-  --tw-ring-color: #673de6 !important;
-}
-
-/* ================================================
-   SIDEBAR
-   ================================================ */
+/* ---- SIDEBAR ---- */
 .v2-open #sidebar-v2,
 #sidebar-v2,
 #sidebar-v2 .default-bg-color,
 #sidebar-v2.default-bg-color {
-  background: var(--cliq-sidebar-bg) !important;
+  background: var(--nav-menus-background-color) !important;
 }
 
-/* Sidebar text */
-#sidebar-v2 .text-white,
-nav .text-white,
-nav span,
-#sidebar-v2 a[id^="sb_"] .nav-title,
-#sidebar-v2 a[id^="sb_"] span {
-  color: var(--cliq-sidebar-text) !important;
+#sidebar-v2 #sb_divider-1 {
+  background: var(--nav-menus-background-color) !important;
 }
 
-/* Sidebar icons — SVG stroke */
-nav svg path {
-  stroke: var(--cliq-sidebar-icon) !important;
+#sidebar-v2 #backButtonv2 {
+  background: var(--sidebar-agency-back-button) !important;
 }
 
-/* Some icons use fill */
-#sb_agency-partners svg path,
-#sb_sites svg path,
-#sb_contacts svg path,
-#sb_conversations svg path {
-  fill: var(--cliq-sidebar-icon) !important;
+#quickActions {
+  border: 1px solid var(--nav-menu-icon-color) !important;
+  border-radius: 50px !important;
 }
 
-/* Nav item spacing */
 nav a {
   margin-top: 5px !important;
 }
 
-/* Active and hover states */
+#sidebar-v2 .text-white,
+nav .text-white,
+nav span {
+  --tw-text-opacity: 1;
+  color: var(--nav-menu-text-color) !important;
+}
+
+#sb_agency-partners svg path,
+#sb_sites svg path,
+#sb_contacts svg path {
+  fill: var(--nav-menu-icon-color) !important;
+}
+
+nav svg path {
+  stroke: var(--nav-menu-icon-color) !important;
+}
+
 nav a.active,
-nav a:hover,
-#sidebar-v2 a[id^="sb_"].active,
-#sidebar-v2 a[id^="sb_"].exact-active {
-  background: var(--cliq-sidebar-active) !important;
-  border-left: 3px solid var(--cliq-primary) !important;
+nav a:hover {
+  background: var(--nav-hover-background-color) !important;
 }
 
-/* Active text color */
-#sidebar-v2 a[id^="sb_"].active .nav-title,
-#sidebar-v2 a[id^="sb_"].exact-active .nav-title,
-#sidebar-v2 a[id^="sb_"].active span,
-#sidebar-v2 a[id^="sb_"].exact-active span {
-  color: var(--cliq-primary) !important;
-}
-
-/* Location switcher */
 #location-switcher-sidbar-v2 {
-  background: var(--cliq-switcher-bg) !important;
-  border-radius: 8px !important;
+  background: var(--location-switcher-background-color) !important;
 }
 
-/* Location switcher text */
-.hl_switcher-loc-name,
-.hl_switcher-loc-city {
-  color: var(--cliq-sidebar-text) !important;
+#sb_other-settings,
+#sb_business-services {
+  background: var(--sb-divider-background-color, transparent) !important;
 }
 
-/* Search bar */
-#globalSearchOpener {
-  background: var(--cliq-switcher-bg) !important;
-  border-radius: 6px !important;
+#sidebar-v2 i.text-white,
+nav i.text-white,
+nav span i {
+  color: var(--nav-menu-icon-color) !important;
 }
 
-#globalSearchOpener .search-placeholder {
-  color: rgba(255,255,255,0.45) !important;
-}
-
-/* Quick actions */
-#quickActions {
-  background: var(--cliq-switcher-bg) !important;
-  border-radius: 6px !important;
-  border: 1px solid var(--cliq-sidebar-icon) !important;
-}
-
-/* Sidebar dividers */
-#sidebar-v2 #sb_divider-1,
-#sidebar-v2 .divider p {
-  border-color: var(--cliq-divider) !important;
-  background: transparent !important;
-}
-
-/* Settings and back button icons */
+/* Settings gear icon */
 #sb_agency-settings::before,
 #sb_settings::before,
 #sb_undefined::before {
@@ -123,263 +74,47 @@ nav a:hover,
   position: absolute;
   left: 16px;
   font-size: 17px;
-  color: var(--cliq-sidebar-icon);
+  color: var(--nav-menu-icon-color);
 }
 #sb_agency-settings::before,
-#sb_settings::before {
-  content: "\f013";
-}
-#sb_undefined::before {
-  content: "\f0e2";
-}
+#sb_settings::before { content: "\f013"; }
+#sb_undefined::before { content: "\f0e2"; }
 #sb_agency-settings,
 #sb_settings,
-#sb_undefined {
-  padding-left: 40px !important;
-}
+#sb_undefined { padding-left: 40px !important; }
 #sb_agency-settings > img,
 #sb_settings > img,
-#sb_undefined > img {
-  display: none !important;
-}
+#sb_undefined > img { display: none !important; }
 
-/* Back button */
-#sidebar-v2 #backButtonv2 {
-  background: var(--cliq-primary-light) !important;
-}
-
-/* Other settings divider */
-#sb_other-settings,
-#sb_business-services {
-  background: transparent !important;
-}
-
-/* Sidebar icon text color */
-#sidebar-v2 i.text-white,
-nav i.text-white,
-nav span i {
-  color: var(--cliq-sidebar-icon) !important;
-}
-
-/* ================================================
-   HEADER
-   ================================================ */
-HEADER.hl_header {
-  background-color: var(--cliq-header-bg) !important;
-}
-
-/* Help button */
-#hl_header--help-icon {
-  background-color: var(--cliq-primary) !important;
-}
-
-/* Copilot icon */
-#hl_header--copilot-icon {
-  color: var(--cliq-primary) !important;
-  border-color: var(--cliq-primary-light) !important;
-}
-
-/* Changelog button */
-#canny_logs-toggle {
-  background-color: var(--cliq-primary-hover) !important;
-}
-
-/* ================================================
-   TOP NAVIGATION TABS
-   ================================================ */
-a.topmenu-navitem.active {
-  color: var(--cliq-primary) !important;
-  border-bottom-color: var(--cliq-primary) !important;
-}
-
-/* Sub menu active */
-a[id^="tb-sub_"].active {
-  color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   BUTTONS
-   ================================================ */
-
-/* Primary buttons */
-.n-button--primary-type,
-.hr-button--primary-type,
-.hr-button--primary,
-.bg-apple-500,
-button.bg-apple-500,
-.btn-primary {
-  background-color: var(--cliq-button-bg) !important;
-  color: var(--cliq-button-text) !important;
-}
-
-.n-button--primary-type:hover,
-.hr-button--primary-type:hover {
-  background-color: var(--cliq-primary-hover) !important;
-}
-
-/* Tertiary buttons */
-.n-button--tertiary-type,
-.hr-button--tertiary-type {
-  background-color: var(--cliq-primary-light) !important;
-  color: var(--cliq-primary) !important;
-}
-
-/* Button border color */
-.hr-button__border,
-.n-button__border {
-  border-color: var(--cliq-primary) !important;
-}
-
-/* Focus ring */
-.focus\:outline-none:focus {
-  outline: 2px solid var(--cliq-primary) !important;
-}
-
-/* Specific GHL buttons */
-#new-appointment-button,
-#add-record-btn,
-#data-create-opportunity,
-#new-conversation-btn-collapsed,
-#hl-media-upload,
-#create-new-button,
-#import-btn,
-#use-existing-phone-btn {
-  background-color: var(--cliq-button-bg) !important;
-}
-
-/* ================================================
-   CARD HEADERS
-   ================================================ */
+/* ---- CARD HEADERS ---- */
 .card-header {
-  background: var(--cliq-card-header-bg) !important;
+  background: var(--card-header-background-color) !important;
 }
-
 #dashboard .hl_tasks-list button.dropdown-toggle,
 #dashboard .hl_dashboard--sales-funnel .btn.btn-primary {
   background-color: transparent !important;
 }
-
 .card-header h2,
 .card-header h3 {
-  color: var(--cliq-card-header-text) !important;
+  color: var(--card-header-text-color) !important;
 }
 
-/* ================================================
-   PAGINATION
-   ================================================ */
-.n-pagination-item--active {
-  color: var(--cliq-primary) !important;
-  border-color: var(--cliq-primary) !important;
+/* ---- BUTTONS ---- */
+.bg-apple-500 {
+  background: var(--button-background-color) !important;
+  color: var(--button-text-color, #fff) !important;
+}
+.focus\:outline-none:focus {
+  outline: 2px solid var(--button-background-color) !important;
 }
 
-.tabulator-page.active {
-  color: var(--cliq-primary) !important;
-  border-color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   INPUTS & SELECTS
-   ================================================ */
-.n-input__border,
-.hr-input__border,
-.n-base-selection__border {
-  border-color: #e5e7eb !important;
-}
-
-/* Focus states */
-div.hl_login--body .focus\:border-curious-blue-500:focus,
-input:focus {
-  border-color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   CONVERSATIONS
-   ================================================ */
-#conv-menu-item-team-inbox.active {
-  color: var(--cliq-primary) !important;
-  background: var(--cliq-primary-light) !important;
-}
-
-#conversations-view-all-btn {
-  background-color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   CONTACTS / TABLE
-   ================================================ */
-DIV.count {
-  background-color: var(--cliq-primary-light) !important;
-  color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   CALENDARS
-   ================================================ */
-.fc-day-today {
-  color: var(--cliq-primary) !important;
-}
-
-.n-radio__dot--checked {
-  background-color: var(--cliq-primary-light) !important;
-  border-color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   SVG ICONS (primary color)
-   ================================================ */
-svg.text-primary-600,
-svg.h-5.w-5.text-primary-600,
-svg.pointer.ml-2.text-primary-600 {
-  color: var(--cliq-primary) !important;
-}
-
-.n-base-loading,
-.hr-base-loading {
-  color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   BULK ACTIONS / BADGES
-   ================================================ */
-.bulk-action.d-flex {
-  background-color: var(--cliq-primary-light) !important;
-  color: var(--cliq-primary) !important;
-}
-
-/* ================================================
-   DATE PICKER
-   ================================================ */
+/* ---- DATE PICKER ---- */
 #dashboard .date-time-picker .field .field-input {
-  color: #111 !important;
+  color: var(--dashboard-time-and-date-color, #000) !important;
 }
 
-/* ================================================
-   DIALER
-   ================================================ */
-.flex.items-center.justify-between.border-b.border-gray-200.px-2.py-1 {
-  background-color: var(--cliq-primary-light) !important;
-}
-
-/* ================================================
-   LOGIN PAGE
-   ================================================ */
-[class~='hl_login'] {
-  background-color: var(--cliq-primary) !important;
-}
-
-[class~='hl_login'] button {
-  background-color: var(--cliq-button-bg) !important;
-  color: var(--cliq-button-text) !important;
-}
-
-.hl_login button:hover {
-  background-color: var(--cliq-primary-hover) !important;
-}
-
-div.hl_login--body .focus\:ring-curious-blue-500:focus {
-  --tw-ring-color: var(--cliq-primary) !important;
-}
-
-section.hl_login .card .card-body .font-semibold.cursor-pointer.w-full.text-center.text-curious-blue-500 {
-  color: var(--cliq-primary) !important;
+/* ---- SUBACCOUNT SWITCHER TEXT ---- */
+.hl_switcher-loc-name,
+.hl_switcher-loc-city {
+  color: var(--nav-menu-text-color) !important;
 }
