@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TheCliqLabs Control Panel</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Inter,Arial,sans-serif;background:#f4f6f9;color:#111;height:100vh;overflow:hidden;display:flex;flex-direction:column;}
+
+/* TOP BAR */
+.topbar{
+  background:#1a1a2e;
+  padding:0 24px;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+}
+.topbar-logo{
+  font-size:20px;
+  font-weight:900;
+  font-family:Arial Black,sans-serif;
+  color:white;
+}
+.topbar-logo span{color:#673de6;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.topbar-license{
+  color:rgba(255,255,255,0.4);
+  font-size:12px;
+}
+.topbar-license b{color:rgba(255,255,255,0.7);}
+.upgrade-btn{
+  background:#673de6;
+  color:white;
+  border:none;
+  padding:7px 18px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  transition:background 0.2s;
+}
+.upgrade-btn:hover{background:#5a32c7;}
+
+/* SUB TOPBAR */
+.sub-topbar{
+  background:white;
+  padding:12px 24px;
+  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  flex-shrink:0;
+}
+.sub-topbar-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-right:8px;
+}
+.sub-topbar-title img{width:28px;height:28px;}
+.sub-topbar-title .title-text h2{font-size:15px;font-weight:700;color:#111;line-height:1;}
+.sub-topbar-title .title-text p{font-size:11px;color:#888;margin-top:2px;}
+
+.action-btn{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 14px;
+  border-radius:6px;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+  border:none;
+  transition:all 0.15s;
+}
+.btn-purple{background:#673de6;color:white;}
+.btn-purple:hover{background:#5a32c7;}
+.btn-outline{background:white;color:#333;border:1px solid #d1d5db;}
+.btn-outline:hover{background:#f9fafb;}
+.btn-icon{font-size:13px;}
+
+/* SEARCH BAR */
+.search-bar{
+  display:flex;
+  align-items:center;
+  background:#f4f6f9;
+  border:1px solid #e5e7eb;
+  border-radius:6px;
+  padding:6px 12px;
+  gap:6px;
+  min-width:200px;
+}
+.search-bar input{
+  border:none;
+  background:transparent;
+  outline:none;
+  font-size:13px;
+  color:#333;
+  width:100%;
+}
+.search-bar input::placeholder{color:#aaa;}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:flex;
+  flex:1;
+  overflow:hidden;
+  position:relative;
+}
+
+/* TABLE AREA */
+.table-area{
+  flex:1;
+  overflow-y:auto;
+  padding:0;
+  transition:margin-right 0.3s ease;
+}
+.table-area.panel-open{margin-right:380px;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;background:white;}
+thead tr{background:#f8f9fa;border-bottom:2px solid #e5e7eb;}
+th{
+  padding:12px 14px;
+  font-size:11.5px;
+  font-weight:700;
+  color:#666;
+  text-align:left;
+  white-space:nowrap;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+th.center{text-align:center;}
+tbody tr{border-bottom:1px solid #f0f0f0;transition:background 0.1s;}
+tbody tr:hover{background:#fafafa;}
+td{padding:11px 14px;font-size:13px;color:#333;vertical-align:middle;}
+td.center{text-align:center;}
+
+.sub-name{font-weight:600;color:#111;font-size:13px;}
+.sub-id{font-size:10.5px;color:#aaa;margin-top:2px;}
+.sub-link{color:#673de6;text-decoration:none;font-size:11px;}
+.sub-link:hover{text-decoration:underline;}
+
+/* TOGGLE */
+.toggle{
+  width:36px;height:20px;
+  background:#d1d5db;
+  border-radius:10px;
+  cursor:pointer;
+  position:relative;
+  transition:background 0.2s;
+  display:inline-block;
+}
+.toggle.on{background:#673de6;}
+.toggle::after{
+  content:'';
+  position:absolute;
+  width:16px;height:16px;
+  background:white;
+  border-radius:50%;
+  top:2px;left:2px;
+  transition:left 0.2s;
+  box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle.on::after{left:18px;}
+
+/* UPLOAD BTN */
+.upload-btn{
+  display:flex;align-items:center;gap:5px;
+  background:white;border:1px solid #d1d5db;
+  padding:5px 10px;border-radius:5px;
+  font-size:11.5px;color:#555;
+  cursor:pointer;white-space:nowrap;
+}
+.upload-btn:hover{background:#f9fafb;}
+
+/* THEME BTN */
+.theme-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:5px;
+  font-size:11.5px;font-weight:600;
+  cursor:pointer;white-space:nowrap;
+  transition:all 0.15s;
+  border:none;
+}
+.theme-btn.active{background:#673de6;color:white;}
+.theme-btn.inactive{background:white;color:#555;border:1px solid #d1d5db;}
+.theme-btn.inactive:hover{background:#f3f0ff;border-color:#673de6;color:#673de6;}
+.theme-btn .gear{font-size:12px;opacity:0.7;}
+
+/* SMALL ACTION BTN */
+.small-btn{
+  display:flex;align-items:center;gap:4px;
+  padding:5px 10px;border-radius:5px;
+  font-size:11.5px;color:#555;
+  background:white;border:1px solid #d1d5db;
+  cursor:pointer;white-space:nowrap;
+}
+.small-btn:hover{background:#f9fafb;}
+
+/* CHECKBOX */
+.checkbox{
+  width:16px;height:16px;
+  border:2px solid #d1d5db;
+  border-radius:3px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:all 0.15s;
+}
+.checkbox.checked{background:#673de6;border-color:#673de6;color:white;font-size:10px;}
+
+/* RIGHT PANEL */
+.right-panel{
+  position:fixed;
+  right:-400px;
+  top:56px;
+  width:380px;
+  height:calc(100vh - 56px);
+  background:white;
+  border-left:1px solid #e5e7eb;
+  display:flex;
+  flex-direction:column;
+  transition:right 0.3s ease;
+  z-index:100;
+  box-shadow:-4px 0 20px rgba(0,0,0,0.08);
+}
+.right-panel.open{right:0;}
+
+.panel-header{
+  background:#673de6;
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+}
+.panel-header h3{
+  color:white;
+  font-size:18px;
+  font-weight:900;
+  font-family:Arial Black,sans-serif;
+}
+.panel-close{
+  background:rgba(255,255,255,0.2);
+  border:none;
+  color:white;
+  width:28px;height:28px;
+  border-radius:50%;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;
+}
+.panel-close:hover{background:rgba(255,255,255,0.3);}
+
+.panel-body{
+  flex:1;
+  overflow-y:auto;
+  padding:16px;
+}
+
+/* THEME DROPDOWN */
+.theme-dropdown{
+  background:#1a1a2e;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:7px;
+  width:100%;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  margin-bottom:14px;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+}
+
+/* ACCORDION */
+.accordion{margin-bottom:8px;border-radius:8px;overflow:hidden;border:1px solid #e5e7eb;}
+.accordion-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 14px;
+  cursor:pointer;
+  font-size:13px;font-weight:700;
+  transition:background 0.15s;
+  background:#f8f9fa;
+}
+.accordion-header.active{background:#673de6;color:white;}
+.accordion-header .acc-icon{font-size:12px;margin-right:7px;}
+.accordion-header .acc-check{
+  width:18px;height:18px;
+  background:rgba(255,255,255,0.3);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;
+}
+.accordion-header.active .acc-check{background:rgba(255,255,255,0.9);color:#673de6;}
+.accordion-content{
+  padding:14px;
+  display:none;
+  background:white;
+}
+.accordion-content.open{display:block;}
+
+/* FORM FIELDS */
+.field-row{
+  display:flex;align-items:center;
+  margin-bottom:11px;
+  gap:10px;
+}
+.field-row:last-child{margin-bottom:0;}
+.field-label{
+  font-size:12px;color:#555;
+  flex:1;white-space:nowrap;
+}
+.field-input{
+  display:flex;align-items:center;gap:6px;
+}
+.color-box{
+  width:24px;height:24px;
+  border:1px solid #d1d5db;
+  border-radius:4px;
+  cursor:pointer;
+  flex-shrink:0;
+}
+.hex-input{
+  width:80px;
+  border:1px solid #d1d5db;
+  border-radius:4px;
+  padding:4px 7px;
+  font-size:11.5px;
+  color:#333;
+  font-family:monospace;
+}
+.nav-toggle{
+  display:flex;
+  border:1px solid #d1d5db;
+  border-radius:5px;
+  overflow:hidden;
+}
+.nav-toggle button{
+  padding:4px 12px;
+  font-size:11.5px;
+  border:none;
+  background:white;
+  color:#555;
+  cursor:pointer;
+}
+.nav-toggle button.active{background:#673de6;color:white;}
+
+.field-input-full{
+  width:100%;
+  border:1px solid #d1d5db;
+  border-radius:4px;
+  padding:6px 10px;
+  font-size:12px;
+  color:#333;
+  margin-top:5px;
+}
+.field-note{font-size:11px;color:#aaa;margin-top:5px;line-height:1.4;}
+
+/* SAVE BTN */
+.save-btn{
+  background:#673de6;
+  color:white;
+  border:none;
+  width:100%;
+  padding:13px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background 0.2s;
+  flex-shrink:0;
+}
+.save-btn:hover{background:#5a32c7;}
+.save-btn-sub{font-size:10px;opacity:0.8;font-weight:400;}
+
+/* TOGGLE SWITCH IN FORM */
+.form-toggle{
+  width:36px;height:20px;
+  background:#d1d5db;
+  border-radius:10px;
+  cursor:pointer;
+  position:relative;
+  transition:background 0.2s;
+  display:inline-block;
+  flex-shrink:0;
+}
+.form-toggle.on{background:#673de6;}
+.form-toggle::after{
+  content:'';position:absolute;
+  width:16px;height:16px;background:white;
+  border-radius:50%;top:2px;left:2px;
+  transition:left 0.2s;
+  box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+.form-toggle.on::after{left:18px;}
+
+/* BADGE */
+.new-badge{
+  background:#f59e0b;
+  color:white;
+  font-size:9px;
+  font-weight:800;
+  padding:2px 6px;
+  border-radius:3px;
+  letter-spacing:0.5px;
+}
+
+/* NOTIFICATION */
+.notification{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:#1a1a2e;
+  color:white;
+  padding:12px 24px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,0.3);
+  transition:transform 0.3s ease;
+  z-index:999;
+  display:flex;align-items:center;gap:8px;
+}
+.notification.show{transform:translateX(-50%) translateY(0);}
+.notification .notif-icon{color:#673de6;font-size:16px;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">TheCliq<span>Labs</span></div>
+  <div class="topbar-right">
+    <div class="topbar-license">License: <b id="license-key">XXXXXXXXXXXXXXXXX</b></div>
+    <button class="upgrade-btn">⚡ UPGRADE</button>
+  </div>
+</div>
+
+<!-- SUB TOPBAR -->
+<div class="sub-topbar">
+  <div class="sub-topbar-title">
+    <div class="title-text">
+      <h2>⚡ Control Panel</h2>
+      <p>Manage Global and Sub-Account Settings with ease!</p>
+    </div>
+  </div>
+  <button class="action-btn btn-purple" onclick="enableSelected()">✓ Enable Selected</button>
+  <button class="action-btn btn-outline" onclick="disableSelected()">✕ Disable Selected</button>
+  <button class="action-btn btn-outline"><span class="btn-icon">🔄</span> Sync</button>
+  <div class="search-bar">
+    <span>🔍</span>
+    <input type="text" placeholder="Search Sub-accounts..." oninput="filterTable(this.value)">
+  </div>
+  <button class="action-btn btn-purple" onclick="openAlertPopups()">📢 Alert Popups</button>
+  <button class="action-btn btn-outline">📁 Manage Projects</button>
+  <button class="action-btn btn-outline">⚙️ Advanced</button>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- TABLE -->
+  <div class="table-area" id="tableArea">
+    <table id="mainTable">
+      <thead>
+        <tr>
+          <th style="width:36px;"><div class="checkbox" onclick="toggleAll(this)"></div></th>
+          <th>Sub-Account Name</th>
+          <th class="center">Widget</th>
+          <th class="center">Chat/Tickets</th>
+          <th class="center">Priority</th>
+          <th class="center">Tours</th>
+          <th class="center">Projects</th>
+          <th class="center">Location<br>Custom Logo</th>
+          <th class="center">Theme Builder<br>Settings</th>
+          <th class="center">Smart Buttons<br>Settings</th>
+          <th class="center">Alert Popup<br>Settings</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Rows injected by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel" id="rightPanel">
+    <div class="panel-header">
+      <h3>Theme Builder</h3>
+      <button class="panel-close" onclick="closePanel()">×</button>
+    </div>
+
+    <div class="panel-body">
+
+      <!-- Theme Dropdown -->
+      <select class="theme-dropdown" id="themeSelect" onchange="onThemeChange(this.value)">
+        <option value="cliq-purple">CliqLabs Purple</option>
+        <option value="dark-pro">Dark Pro</option>
+        <option value="midnight-blue">Midnight Blue</option>
+        <option value="clean-white">Clean White</option>
+        <option value="crimson">Crimson</option>
+        <option value="gold-elite">Gold Elite</option>
+        <option value="no-theme">No Theme</option>
+      </select>
+
+      <!-- General Settings -->
+      <div class="accordion">
+        <div class="accordion-header active" onclick="toggleAccordion(this)">
+          <div><span class="acc-icon">⚙️</span> General Settings</div>
+          <div class="acc-check">✓</div>
+        </div>
+        <div class="accordion-content open">
+          <div class="field-row">
+            <div class="field-label">Choose Primary Color:</div>
+            <div class="field-input">
+              <input type="color" id="primaryColor" value="#673de6" class="color-box" oninput="updateHex('primaryColorHex',this.value)">
+              <input type="text" id="primaryColorHex" class="hex-input" value="#673de6" oninput="updateColor('primaryColor',this.value)">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Choose Primary BG Color:</div>
+            <div class="field-input">
+              <input type="color" id="primaryBg" value="#1a1a2e" class="color-box" oninput="updateHex('primaryBgHex',this.value)">
+              <input type="text" id="primaryBgHex" class="hex-input" value="#1a1a2e" oninput="updateColor('primaryBg',this.value)">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Choose BG Gradient Color:</div>
+            <div class="field-input">
+              <input type="color" id="bgGradient" value="#2d1b69" class="color-box" oninput="updateHex('bgGradientHex',this.value)">
+              <input type="text" id="bgGradientHex" class="hex-input" value="#2d1b69" oninput="updateColor('bgGradient',this.value)">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Choose Left Sidebar Color:</div>
+            <div class="field-input">
+              <input type="color" id="sidebarColor" value="#1a1a2e" class="color-box" oninput="updateHex('sidebarColorHex',this.value)">
+              <input type="text" id="sidebarColorHex" class="hex-input" value="#1a1a2e" oninput="updateColor('sidebarColor',this.value)">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Left Sidebar Icon Color:</div>
+            <div class="field-input">
+              <input type="color" id="iconColor" value="#ffffff" class="color-box" oninput="updateHex('iconColorHex',this.value)">
+              <input type="text" id="iconColorHex" class="hex-input" value="#ffffff" oninput="updateColor('iconColor',this.value)">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Main Navigation:</div>
+            <div class="nav-toggle">
+              <button class="active" onclick="setNav('left',this)">Left</button>
+              <button onclick="setNav('top',this)">Top</button>
+            </div>
+          </div>
+          <p class="field-note">Top navigation only works for 18 menu items or less</p>
+        </div>
+      </div>
+
+      <!-- Login Page Settings -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div><span class="acc-icon">🔑</span> Login Page Settings</div>
+          <div class="acc-check" style="background:#e5e7eb;color:#999;">›</div>
+        </div>
+        <div class="accordion-content">
+          <div class="field-row">
+            <div class="field-label">Form Position:</div>
+            <div class="nav-toggle">
+              <button onclick="setPos('left',this)">LEFT</button>
+              <button class="active" onclick="setPos('center',this)">CENTER</button>
+              <button onclick="setPos('right',this)">RIGHT</button>
+            </div>
+          </div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Login Contact Info:</div>
+            <input type="text" class="field-input-full" placeholder="Footer note here...">
+          </div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Cover Image URL:</div>
+            <input type="text" class="field-input-full" placeholder="www.yourimageurl/img.png">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Login Logo Width:</div>
+            <div class="field-input">
+              <input type="text" class="hex-input" value="320" style="width:60px;"> px
+            </div>
+          </div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Login Logo URL:</div>
+            <input type="text" class="field-input-full" placeholder="www.yourlogoimageurl/img.png">
+          </div>
+          <div class="field-label" style="margin-top:10px;font-weight:700;">Loading Icon</div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;margin-top:6px;">
+            <div class="field-label">Loading Icon URL:</div>
+            <input type="text" class="field-input-full" placeholder="imageurl.io/img.png">
+          </div>
+          <div class="field-row">
+            <div class="field-label">Loading Icon Size:</div>
+            <div class="field-input">
+              <input type="text" class="hex-input" value="80" style="width:60px;"> px
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Settings -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div><span class="acc-icon">🔧</span> Advanced Settings</div>
+          <div class="acc-check" style="background:#e5e7eb;color:#999;">›</div>
+        </div>
+        <div class="accordion-content">
+          <div class="field-row">
+            <div class="field-label">Activate Advanced Options:</div>
+            <div class="form-toggle" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div class="field-label" style="font-weight:700;margin-bottom:8px;">Header Controls → Settings</div>
+          <div class="field-label" style="color:#673de6;margin-bottom:8px;">Header Background Color</div>
+          <div class="field-row">
+            <div class="field-label">Color Start:</div>
+            <div class="field-input">
+              <input type="color" value="#ffffff" class="color-box">
+              <input type="text" class="hex-input" value="#FFFFFF">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Color End:</div>
+            <div class="field-input">
+              <input type="color" value="#ffffff" class="color-box">
+              <input type="text" class="hex-input" value="#FFFFFF">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Color Stop Percentage:</div>
+            <div class="field-input">
+              <input type="text" class="hex-input" value="50" style="width:50px;"> %
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-label">Gradient Angle:</div>
+            <div class="field-input">
+              <input type="text" class="hex-input" value="-45" style="width:50px;"> deg
+            </div>
+          </div>
+          <p class="field-note">For flat color in header: Choose same color for start & end, stop percentage: 0%, gradient angle: 0</p>
+        </div>
+      </div>
+
+      <!-- Feature Lock & Hide Settings -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div><span class="acc-icon">🔒</span> Feature Lock & Hide Settings</div>
+          <div class="acc-check" style="background:#e5e7eb;color:#999;">›</div>
+        </div>
+        <div class="accordion-content">
+          <div class="field-label" style="font-weight:700;margin-bottom:10px;">Setup Locations Data & Unlock Message</div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Googlesheet URL:</div>
+            <input type="text" class="field-input-full" placeholder="Google Spreadsheet url">
+          </div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Google WebApp URL:</div>
+            <input type="text" class="field-input-full" placeholder="Google webApp URL">
+          </div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Unlock Message URL:</div>
+            <input type="text" class="field-input-full" placeholder="Unlock message url">
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub Account & Global Settings -->
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div><span class="acc-icon">🏢</span> Sub Account & Global Settings</div>
+          <div class="acc-check" style="background:#e5e7eb;color:#999;">›</div>
+        </div>
+        <div class="accordion-content">
+          <p class="field-note" style="margin-bottom:12px;">All configurations within the global settings persist seamlessly, even in instances where the No Theme option is chosen.</p>
+          <div class="field-label" style="font-weight:700;margin-bottom:8px;">Show Theme Builder Button for Sub-Account</div>
+          <div class="field-row" style="flex-direction:column;align-items:flex-start;">
+            <div class="field-label">Location ID:</div>
+            <input type="text" class="field-input-full" placeholder="Sub Account loc. (ex: Dkjh)">
+          </div>
+          <p class="field-note">Make sure you are in Agency dashboard to save this settings. Enter the location ID of sub account in above given input field and the Theme Builder button will be enabled and accessible for the entered sub account. This only applies for 1 sub account at a time.</p>
+        </div>
+      </div>
+
+    </div><!-- end panel-body -->
+
+    <!-- SAVE BUTTON -->
+    <button class="save-btn" onclick="saveAndApplyTheme()">
+      <div>
+        <div>💾 SAVE AND APPLY THEME</div>
+        <div class="save-btn-sub">Option to Apply Globally or to Selected Sub-account</div>
+      </div>
+    </button>
+
+  </div><!-- end right panel -->
+
+</div><!-- end main layout -->
+
+<!-- NOTIFICATION -->
+<div class="notification" id="notification">
+  <span class="notif-icon">✓</span>
+  <span id="notif-text">Theme saved and applied!</span>
+</div>
+
+<script>
+// SAMPLE SUB-ACCOUNT DATA
+var subAccounts = [
+  {id:'tUtho1b4yEFnC3PYa8', name:'', active:true},
+  {id:'JJJCeG8rmjfteI3ZWDlvI', name:'Lavonda Dukes', active:true},
+  {id:'zS0HKoKI8GTbG0u3Fb0Y', name:'456 Kuhn St', active:true},
+  {id:'ZBZ4UjG0hpI9W0xM6WgM', name:'6 Figure Mindset Community', active:true},
+  {id:'SCdPVsm4G19M9Fmqa6xQ', name:'7 Figure Pro', active:true},
+  {id:'G85rg83nnd0iiY82HICP', name:"???????? ??????'s Account", active:true},
+  {id:'8rkA2bXmnglhr5uuIRw4', name:'A-GameExpert, LLC', active:true},
+  {id:'aedkYILyKtLjvYZCZLI', name:"A.J.LAMAR JR's Account", active:true},
+  {id:'6XNFQkDBv5GJY8ByGhuY', name:"Aaliyah Ross's Account", active:true},
+  {id:'LqrmGM5RA4WpFzAA9IJu', name:"Aaron W. Cogborn's Account", active:true},
+  {id:'qCtNlJ4Nt2ayIzsIfu08Q', name:"Abi Danielle's Account", active:true},
+];
+
+function renderTable(accounts) {
+  var tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  accounts.forEach(function(acc, i) {
+    var isFirst = (i === 0 && acc.active);
+    tbody.innerHTML += `
+      <tr>
+        <td><div class="checkbox" onclick="this.classList.toggle('checked');this.textContent=this.classList.contains('checked')?'✓':''"></div></td>
+        <td>
+          <div class="sub-name">${acc.name || '<span style="color:#aaa;font-style:italic">Unnamed Account</span>'}</div>
+          <div class="sub-id">ID: ${acc.id}</div>
+          ${acc.name ? `<a href="#" class="sub-link">↗ Open</a>` : ''}
+        </td>
+        <td class="center"><div class="toggle ${acc.active?'on':''}" onclick="this.classList.toggle('on')"></div></td>
+        <td class="center"><div class="toggle ${acc.active?'on':''}" onclick="this.classList.toggle('on')"></div></td>
+        <td class="center"><div class="toggle" onclick="this.classList.toggle('on')"></div></td>
+        <td class="center"><div class="toggle ${acc.active?'on':''}" onclick="this.classList.toggle('on')"></div></td>
+        <td class="center"><div class="toggle" onclick="this.classList.toggle('on')"></div></td>
+        <td class="center">
+          <button class="upload-btn">☁ Upload</button>
+        </td>
+        <td class="center">
+          <button class="theme-btn ${isFirst?'active':'inactive'}" onclick="openPanel(this, '${acc.id}')">
+            ${isFirst ? 'CliqLabs Purple' : 'No Theme'} <span class="gear">⚙</span>
+          </button>
+        </td>
+        <td class="center">
+          <button class="small-btn">⚡ Smart Buttons</button>
+        </td>
+        <td class="center">
+          <button class="small-btn">📢 Alert Popup</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+renderTable(subAccounts);
+
+// PANEL
+var currentAccountId = null;
+
+function openPanel(btn, accountId) {
+  currentAccountId = accountId;
+  document.getElementById('rightPanel').classList.add('open');
+  document.getElementById('tableArea').classList.add('panel-open');
+}
+
+function closePanel() {
+  document.getElementById('rightPanel').classList.remove('open');
+  document.getElementById('tableArea').classList.remove('panel-open');
+}
+
+// ACCORDION
+function toggleAccordion(header) {
+  var content = header.nextElementSibling;
+  var isOpen = content.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.accordion-content').forEach(function(c){c.classList.remove('open');});
+  document.querySelectorAll('.accordion-header').forEach(function(h){
+    h.classList.remove('active');
+    var chk = h.querySelector('.acc-check');
+    if(chk){chk.style.background='#e5e7eb';chk.style.color='#999';chk.textContent='›';}
+  });
+  if(!isOpen){
+    content.classList.add('open');
+    header.classList.add('active');
+    var chk = header.querySelector('.acc-check');
+    if(chk){chk.style.background='rgba(255,255,255,0.9)';chk.style.color='#673de6';chk.textContent='✓';}
+  }
+}
+
+// COLOR SYNC
+function updateHex(hexId, value){document.getElementById(hexId).value=value;}
+function updateColor(colorId, value){if(/^#[0-9A-Fa-f]{6}$/.test(value))document.getElementById(colorId).value=value;}
+
+// NAV TOGGLE
+function setNav(val, btn){
+  btn.parentNode.querySelectorAll('button').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+function setPos(val, btn){
+  btn.parentNode.querySelectorAll('button').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+// THEME PRESETS
+var themePresets = {
+  'cliq-purple': {primaryColor:'#673de6',primaryBg:'#1a1a2e',bgGradient:'#2d1b69',sidebarColor:'#1a1a2e',iconColor:'#ffffff'},
+  'dark-pro':    {primaryColor:'#0f3460',primaryBg:'#16213e',bgGradient:'#0f3460',sidebarColor:'#1a1a2e',iconColor:'#ffffff'},
+  'midnight-blue':{primaryColor:'#3b82f6',primaryBg:'#0f172a',bgGradient:'#1e293b',sidebarColor:'#0f172a',iconColor:'#ffffff'},
+  'clean-white': {primaryColor:'#6366f1',primaryBg:'#ffffff',bgGradient:'#f8f8f8',sidebarColor:'#f8f9fa',iconColor:'#333333'},
+  'crimson':     {primaryColor:'#dc2626',primaryBg:'#1a0000',bgGradient:'#2d0000',sidebarColor:'#1a0000',iconColor:'#ffffff'},
+  'gold-elite':  {primaryColor:'#d97706',primaryBg:'#1a1500',bgGradient:'#2d2000',sidebarColor:'#1a1500',iconColor:'#ffffff'},
+  'no-theme':    {primaryColor:'#1565ef',primaryBg:'#ffffff',bgGradient:'#ffffff',sidebarColor:'#ffffff',iconColor:'#607179'},
+};
+
+function onThemeChange(val){
+  var preset = themePresets[val];
+  if(!preset) return;
+  document.getElementById('primaryColor').value = preset.primaryColor;
+  document.getElementById('primaryColorHex').value = preset.primaryColor;
+  document.getElementById('primaryBg').value = preset.primaryBg;
+  document.getElementById('primaryBgHex').value = preset.primaryBg;
+  document.getElementById('bgGradient').value = preset.bgGradient;
+  document.getElementById('bgGradientHex').value = preset.bgGradient;
+  document.getElementById('sidebarColor').value = preset.sidebarColor;
+  document.getElementById('sidebarColorHex').value = preset.sidebarColor;
+  document.getElementById('iconColor').value = preset.iconColor;
+  document.getElementById('iconColorHex').value = preset.iconColor;
+}
+
+// SAVE & APPLY
+function saveAndApplyTheme(){
+  var settings = {
+    primaryColor: document.getElementById('primaryColor').value,
+    primaryBg: document.getElementById('primaryBg').value,
+    bgGradient: document.getElementById('bgGradient').value,
+    sidebarColor: document.getElementById('sidebarColor').value,
+    iconColor: document.getElementById('iconColor').value,
+    theme: document.getElementById('themeSelect').value,
+  };
+  localStorage.setItem('cliqlabs_settings', JSON.stringify(settings));
+  // Send to parent GHL window
+  window.parent.postMessage({type:'cliqlabs-apply-theme', settings:settings}, '*');
+  showNotification('✓ Theme saved and applied to all sub-accounts!');
+}
+
+function showNotification(msg){
+  var n = document.getElementById('notification');
+  document.getElementById('notif-text').textContent = msg;
+  n.classList.add('show');
+  setTimeout(function(){n.classList.remove('show');}, 3000);
+}
+
+// SEARCH
+function filterTable(val){
+  var rows = document.querySelectorAll('#tableBody tr');
+  rows.forEach(function(row){
+    var name = row.querySelector('.sub-name');
+    if(!name) return;
+    row.style.display = name.textContent.toLowerCase().includes(val.toLowerCase()) ? '' : 'none';
+  });
+}
+
+// SELECT ALL
+function toggleAll(checkbox){
+  checkbox.classList.toggle('checked');
+  var isChecked = checkbox.classList.contains('checked');
+  checkbox.textContent = isChecked ? '✓' : '';
+  document.querySelectorAll('#tableBody .checkbox').forEach(function(cb){
+    if(isChecked){cb.classList.add('checked');cb.textContent='✓';}
+    else{cb.classList.remove('checked');cb.textContent='';}
+  });
+}
+
+function enableSelected(){showNotification('✓ Selected sub-accounts enabled!');}
+function disableSelected(){showNotification('Selected sub-accounts disabled.');}
+function openAlertPopups(){showNotification('Alert Popups manager coming soon!');}
+</script>
+</body>
+</html>
