@@ -35,7 +35,7 @@
     </div>
 
     <button data-theme="dpc" class="cliq-btn">
-      Neon Theme
+      DPC Theme
     </button>
 
     <button data-theme="glass" class="cliq-btn">
