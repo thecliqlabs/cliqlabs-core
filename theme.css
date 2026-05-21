@@ -1,120 +1,131 @@
 /* ================================================
-   TheCliqLabs — GHL Master Theme CSS v2.0
-   @import url('https://cdn.thecliqlabs.com/theme.css');
+   TheCliqLabs Live Runtime Theme CSS v5
    ================================================ */
 
-/* ---- SIDEBAR ---- */
-.v2-open #sidebar-v2,
+:root{
+
+  --nav-menus-background-color:#111827;
+  --nav-menu-text-color:#ffffff;
+  --nav-menu-icon-color:#9ca3af;
+
+  --button-background-color:#374151;
+
+  --card-header-background-color:#1f2937;
+
+}
+
+/* ================================================
+   SIDEBAR
+   ================================================ */
+
 #sidebar-v2,
-#sidebar-v2 .default-bg-color,
-#sidebar-v2.default-bg-color {
-  background: var(--nav-menus-background-color) !important;
+#sidebar-v2 *,
+.v2-open #sidebar-v2{
+
+  background:
+    var(--nav-menus-background-color)
+    !important;
+
 }
 
-#sidebar-v2 #sb_divider-1 {
-  background: var(--nav-menus-background-color) !important;
+/* menu text */
+
+#sidebar-v2 span,
+#sidebar-v2 a,
+#sidebar-v2 i{
+
+  color:
+    var(--nav-menu-text-color)
+    !important;
+
 }
 
-#sidebar-v2 #backButtonv2 {
-  background: var(--sidebar-agency-back-button) !important;
+/* svg icons */
+
+#sidebar-v2 svg path{
+
+  stroke:
+    var(--nav-menu-icon-color)
+    !important;
+
+  fill:
+    var(--nav-menu-icon-color)
+    !important;
+
 }
 
-#quickActions {
-  border: 1px solid var(--nav-menu-icon-color) !important;
-  border-radius: 50px !important;
+/* active menu */
+
+#sidebar-v2 nav a.active,
+#sidebar-v2 nav a:hover{
+
+  background:
+    rgba(255,255,255,0.12)
+    !important;
+
+  border-radius:10px !important;
+
 }
 
-nav a {
-  margin-top: 5px !important;
+/* ================================================
+   TOP BUTTONS
+   ================================================ */
+
+button,
+.btn,
+.hl-btn,
+.bg-apple-500,
+button[type="button"]{
+
+  background:
+    var(--button-background-color)
+    !important;
+
+  border:none !important;
+
+  color:white !important;
+
 }
 
-#sidebar-v2 .text-white,
-nav .text-white,
-nav span {
-  --tw-text-opacity: 1;
-  color: var(--nav-menu-text-color) !important;
+/* ================================================
+   CARDS
+   ================================================ */
+
+.card-header,
+.dashboard-card-header{
+
+  background:
+    var(--card-header-background-color)
+    !important;
+
+  color:white !important;
+
 }
 
-#sb_agency-partners svg path,
-#sb_sites svg path,
-#sb_contacts svg path {
-  fill: var(--nav-menu-icon-color) !important;
+/* ================================================
+   DROPDOWNS
+   ================================================ */
+
+.hl-select-menu,
+.hl-dropdown-menu{
+
+  border-radius:12px !important;
+
 }
 
-nav svg path {
-  stroke: var(--nav-menu-icon-color) !important;
+/* ================================================
+   SCROLLBAR
+   ================================================ */
+
+::-webkit-scrollbar{
+  width:8px;
 }
 
-nav a.active,
-nav a:hover {
-  background: var(--nav-hover-background-color) !important;
-}
+::-webkit-scrollbar-thumb{
 
-#location-switcher-sidbar-v2 {
-  background: var(--location-switcher-background-color) !important;
-}
+  background:
+    var(--button-background-color);
 
-#sb_other-settings,
-#sb_business-services {
-  background: var(--sb-divider-background-color, transparent) !important;
-}
+  border-radius:20px;
 
-#sidebar-v2 i.text-white,
-nav i.text-white,
-nav span i {
-  color: var(--nav-menu-icon-color) !important;
-}
-
-/* Settings gear icon */
-#sb_agency-settings::before,
-#sb_settings::before,
-#sb_undefined::before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  left: 16px;
-  font-size: 17px;
-  color: var(--nav-menu-icon-color);
-}
-#sb_agency-settings::before,
-#sb_settings::before { content: "\f013"; }
-#sb_undefined::before { content: "\f0e2"; }
-#sb_agency-settings,
-#sb_settings,
-#sb_undefined { padding-left: 40px !important; }
-#sb_agency-settings > img,
-#sb_settings > img,
-#sb_undefined > img { display: none !important; }
-
-/* ---- CARD HEADERS ---- */
-.card-header {
-  background: var(--card-header-background-color) !important;
-}
-#dashboard .hl_tasks-list button.dropdown-toggle,
-#dashboard .hl_dashboard--sales-funnel .btn.btn-primary {
-  background-color: transparent !important;
-}
-.card-header h2,
-.card-header h3 {
-  color: var(--card-header-text-color) !important;
-}
-
-/* ---- BUTTONS ---- */
-.bg-apple-500 {
-  background: var(--button-background-color) !important;
-  color: var(--button-text-color, #fff) !important;
-}
-.focus\:outline-none:focus {
-  outline: 2px solid var(--button-background-color) !important;
-}
-
-/* ---- DATE PICKER ---- */
-#dashboard .date-time-picker .field .field-input {
-  color: var(--dashboard-time-and-date-color, #000) !important;
-}
-
-/* ---- SUBACCOUNT SWITCHER TEXT ---- */
-.hl_switcher-loc-name,
-.hl_switcher-loc-city {
-  color: var(--nav-menu-text-color) !important;
 }
