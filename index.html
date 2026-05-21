@@ -3,252 +3,56 @@
 
 <head>
 
-<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
-/>
+  <title>CliqLabs CDN</title>
 
-<title>TheCliqLabs</title>
+  <style>
 
-<link
-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-rel="stylesheet"
-/>
+    body{
+      margin:0;
+      padding:0;
+      background:#050505;
+      color:white;
+      font-family:Arial,sans-serif;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100vh;
+      overflow:hidden;
+    }
 
-<style>
+    .box{
+      text-align:center;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    h1{
+      font-size:48px;
+      margin-bottom:10px;
+      color:#8dc63f;
+    }
 
-body{
-  font-family:'Inter',sans-serif;
-  background:#f4f7fb;
-  padding:24px;
-}
+    p{
+      color:#999;
+      font-size:16px;
+    }
 
-h1{
-  font-size:28px;
-  margin-bottom:8px;
-}
-
-p{
-  color:#6b7280;
-  margin-bottom:28px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.card{
-  background:white;
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 10px 25px rgba(0,0,0,0.06);
-}
-
-.preview{
-  height:130px;
-  position:relative;
-}
-
-.preview::before{
-  content:'';
-  position:absolute;
-  left:0;
-  top:0;
-  width:72px;
-  height:100%;
-  background:rgba(0,0,0,.3);
-}
-
-.content{
-  padding:18px;
-}
-
-.content h2{
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.content p{
-  font-size:13px;
-  line-height:1.5;
-  margin-bottom:18px;
-}
-
-button{
-  width:100%;
-  height:46px;
-  border:none;
-  border-radius:12px;
-  color:white;
-  font-weight:700;
-  cursor:pointer;
-  font-size:14px;
-}
-
-.purple{
-  background:linear-gradient(135deg,#7c3aed,#4f46e5);
-}
-
-.blue{
-  background:linear-gradient(135deg,#2563eb,#06b6d4);
-}
-
-.green{
-  background:linear-gradient(135deg,#059669,#10b981);
-}
-
-.dark{
-  background:linear-gradient(135deg,#111827,#374151);
-}
-
-@media(max-width:700px){
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-}
-
-</style>
+  </style>
 
 </head>
 
 <body>
 
-<h1>
-  TheCliqLabs
-</h1>
+  <div class="box">
 
-<p>
-  Embedded runtime branding platform for GoHighLevel.
-</p>
+    <h1>CLIQLABS</h1>
 
-<div class="grid">
-
-  <!-- Purple -->
-
-  <div class="card">
-
-    <div class="preview purple"></div>
-
-    <div class="content">
-
-      <h2>Techno Purple</h2>
-
-      <p>
-        Premium purple SaaS branding system.
-      </p>
-
-      <button
-        class="purple"
-        onclick="applyTheme('purple')"
-      >
-        Apply Theme
-      </button>
-
-    </div>
+    <p>
+      Theme Engine CDN Active
+    </p>
 
   </div>
-
-  <!-- Blue -->
-
-  <div class="card">
-
-    <div class="preview blue"></div>
-
-    <div class="content">
-
-      <h2>Ocean Blue</h2>
-
-      <p>
-        Modern blue enterprise dashboard styling.
-      </p>
-
-      <button
-        class="blue"
-        onclick="applyTheme('blue')"
-      >
-        Apply Theme
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- Green -->
-
-  <div class="card">
-
-    <div class="preview green"></div>
-
-    <div class="content">
-
-      <h2>Growth Green</h2>
-
-      <p>
-        Green growth focused agency branding.
-      </p>
-
-      <button
-        class="green"
-        onclick="applyTheme('green')"
-      >
-        Apply Theme
-      </button>
-
-    </div>
-
-  </div>
-
-  <!-- Dark -->
-
-  <div class="card">
-
-    <div class="preview dark"></div>
-
-    <div class="content">
-
-      <h2>Dark Executive</h2>
-
-      <p>
-        Minimal premium dark CRM interface.
-      </p>
-
-      <button
-        class="dark"
-        onclick="applyTheme('dark')"
-      >
-        Apply Theme
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-<script>
-
-function applyTheme(theme){
-
-  window.parent.postMessage({
-    type:'APPLY_THEME',
-    theme:theme
-  }, '*');
-
-}
-
-</script>
 
 </body>
 
