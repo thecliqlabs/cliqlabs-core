@@ -1,250 +1,229 @@
-(function () {
+(() => {
+  // Prevent duplicate loading
+  if (window.cliqLabsLoaded) return;
+  window.cliqLabsLoaded = true;
 
-  if (window.cliqlabsLoaded) return;
-  window.cliqlabsLoaded = true;
+  // =========================
+  // CONFIG
+  // =========================
+
+  const CDN = "https://cdn.thecliqlabs.com/themes/";
 
   const THEMES = [
     {
-      id: "midnight",
-      name: "Midnight",
-      file: "https://cdn.thecliqlabs.com/themes/midnight.css"
-    },
-    {
-      id: "glass",
-      name: "Glass",
-      file: "https://cdn.thecliqlabs.com/themes/glass.css"
-    },
-    {
-      id: "executive",
-      name: "Executive",
-      file: "https://cdn.thecliqlabs.com/themes/executive.css"
-    },
-    {
-      id: "dark-pro",
       name: "Dark Pro",
-      file: "https://cdn.thecliqlabs.com/themes/dark-pro.css"
+      file: "dark-pro.css"
+    },
+    {
+      name: "Midnight",
+      file: "midnight.css"
+    },
+    {
+      name: "Glass",
+      file: "glass.css"
+    },
+    {
+      name: "Executive",
+      file: "executive.css"
     }
   ];
 
-  function removeThemes() {
-    document.querySelectorAll(".cliqlabs-theme").forEach(el => el.remove());
+  // =========================
+  // THEME APPLY
+  // =========================
+
+  function applyTheme(file) {
+    let link = document.getElementById("cliq-theme");
+
+    if (!link) {
+      link = document.createElement("link");
+      link.id = "cliq-theme";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+
+    link.href = `${CDN}${file}?v=${Date.now()}`;
+
+    localStorage.setItem("cliq-theme", file);
   }
 
-  function applyTheme(url) {
-    removeThemes();
+  // =========================
+  // LOAD SAVED THEME ONLY
+  // =========================
 
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = url + "?v=" + Date.now();
-    link.className = "cliqlabs-theme";
+  const savedTheme = localStorage.getItem("cliq-theme");
 
-    document.head.appendChild(link);
+  if (savedTheme) {
+    applyTheme(savedTheme);
   }
 
-  function createButton() {
+  // =========================
+  // PANEL
+  // =========================
 
-    const btn = document.createElement("div");
+  const panel = document.createElement("div");
 
-    btn.innerHTML = `
-      <div style="
-        display:flex;
-        align-items:center;
-        gap:10px;
-        font-size:14px;
-        font-weight:600;
-      ">
-        <span style="font-size:16px;">✦</span>
-        <span>CliqLabs</span>
+  panel.id = "cliq-panel";
+
+  panel.innerHTML = `
+    <div class="cliq-header">
+      <h2>CliqLabs</h2>
+      <p>Runtime Branding System</p>
+    </div>
+
+    <div class="cliq-themes"></div>
+  `;
+
+  document.body.appendChild(panel);
+
+  // =========================
+  // THEME CARDS
+  // =========================
+
+  const themesWrap = panel.querySelector(".cliq-themes");
+
+  THEMES.forEach(theme => {
+    const card = document.createElement("div");
+
+    card.className = "cliq-card";
+
+    card.innerHTML = `
+      <div class="cliq-preview"></div>
+      <div class="cliq-bottom">
+        <span>${theme.name}</span>
       </div>
     `;
 
-    btn.style.cssText = `
-      position:fixed;
-      left:14px;
-      bottom:110px;
-      z-index:999999;
-      background:#111827;
-      color:white;
-      padding:12px 16px;
-      border-radius:12px;
-      cursor:pointer;
-      box-shadow:0 10px 30px rgba(0,0,0,0.25);
-      font-family:Inter,sans-serif;
-      transition:all .2s ease;
-    `;
-
-    btn.onmouseenter = () => {
-      btn.style.transform = "translateY(-2px)";
+    card.onclick = () => {
+      applyTheme(theme.file);
     };
 
-    btn.onmouseleave = () => {
-      btn.style.transform = "translateY(0)";
-    };
+    themesWrap.appendChild(card);
+  });
 
-    document.body.appendChild(btn);
+  // =========================
+  // TOGGLE BUTTON
+  // =========================
 
-    return btn;
-  }
+  const toggle = document.createElement("button");
 
-  function createPanel() {
+  toggle.id = "cliq-toggle";
 
-    const panel = document.createElement("div");
+  toggle.innerHTML = "🎨";
 
-    panel.id = "cliqlabs-panel";
+  document.body.appendChild(toggle);
 
-    panel.style.cssText = `
+  toggle.onclick = () => {
+    panel.classList.toggle("open");
+  };
+
+  // =========================
+  // PANEL CSS
+  // =========================
+
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+    #cliq-panel{
       position:fixed;
       top:0;
-      right:-420px;
-      width:400px;
+      right:-340px;
+      width:340px;
       height:100vh;
-      background:#ffffff;
+      background:#071225;
       z-index:999999;
-      transition:all .3s ease;
-      overflow-y:auto;
-      box-shadow:-10px 0 40px rgba(0,0,0,0.15);
+      transition:.3s ease;
+      overflow:auto;
+      border-left:1px solid rgba(255,255,255,.08);
       font-family:Inter,sans-serif;
-    `;
+    }
 
-    panel.innerHTML = `
-      <div style="
-        padding:24px;
-        border-bottom:1px solid #e5e7eb;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-      ">
-        <div>
-          <div style="
-            font-size:24px;
-            font-weight:700;
-            color:#111827;
-          ">
-            CliqLabs
-          </div>
+    #cliq-panel.open{
+      right:0;
+    }
 
-          <div style="
-            color:#6b7280;
-            margin-top:4px;
-            font-size:14px;
-          ">
-            Premium GoHighLevel Themes
-          </div>
-        </div>
+    .cliq-header{
+      padding:24px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
 
-        <div id="cliqlabs-close"
-          style="
-            cursor:pointer;
-            font-size:24px;
-            color:#6b7280;
-          ">
-          ×
-        </div>
-      </div>
+    .cliq-header h2{
+      color:#fff;
+      margin:0;
+      font-size:28px;
+      font-weight:700;
+    }
 
-      <div id="cliqlabs-theme-list"
-        style="
-          padding:20px;
-          display:flex;
-          flex-direction:column;
-          gap:20px;
-        ">
-      </div>
-    `;
+    .cliq-header p{
+      color:#94a3b8;
+      margin-top:6px;
+      font-size:13px;
+    }
 
-    document.body.appendChild(panel);
+    .cliq-themes{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
 
-    return panel;
-  }
+    .cliq-card{
+      background:#0f172a;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:.25s;
+    }
 
-  function addThemes() {
+    .cliq-card:hover{
+      transform:translateY(-3px);
+      border-color:#3b82f6;
+    }
 
-    const container = document.getElementById("cliqlabs-theme-list");
+    .cliq-preview{
+      height:90px;
+      background:linear-gradient(135deg,#020617,#1e293b);
+    }
 
-    THEMES.forEach(theme => {
+    .cliq-card:nth-child(2) .cliq-preview{
+      background:linear-gradient(135deg,#000,#001d68);
+    }
 
-      const card = document.createElement("div");
+    .cliq-card:nth-child(3) .cliq-preview{
+      background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    }
 
-      card.style.cssText = `
-        border:1px solid #e5e7eb;
-        border-radius:18px;
-        overflow:hidden;
-        background:white;
-      `;
+    .cliq-card:nth-child(4) .cliq-preview{
+      background:linear-gradient(135deg,#000,#374151);
+    }
 
-      card.innerHTML = `
-        <div style="
-          height:120px;
-          background:#111827;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          color:white;
-          font-size:24px;
-          font-weight:700;
-        ">
-          ${theme.name}
-        </div>
+    .cliq-bottom{
+      padding:18px;
+    }
 
-        <div style="padding:18px;">
+    .cliq-bottom span{
+      color:#fff;
+      font-size:16px;
+      font-weight:600;
+    }
 
-          <div style="
-            font-size:18px;
-            font-weight:600;
-            color:#111827;
-          ">
-            ${theme.name}
-          </div>
+    #cliq-toggle{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:58px;
+      height:58px;
+      border:none;
+      border-radius:50%;
+      background:#0f172a;
+      color:#fff;
+      font-size:24px;
+      cursor:pointer;
+      z-index:999999;
+      box-shadow:0 10px 30px rgba(0,0,0,.3);
+    }
+  `;
 
-          <div style="
-            color:#6b7280;
-            font-size:14px;
-            margin-top:6px;
-          ">
-            Professional dashboard styling.
-          </div>
-
-          <button
-            style="
-              margin-top:16px;
-              width:100%;
-              height:48px;
-              border:none;
-              border-radius:12px;
-              background:#111827;
-              color:white;
-              font-size:15px;
-              font-weight:600;
-              cursor:pointer;
-            "
-          >
-            Apply Theme
-          </button>
-
-        </div>
-      `;
-
-      card.querySelector("button").onclick = () => {
-        applyTheme(theme.file);
-      };
-
-      container.appendChild(card);
-
-    });
-
-  }
-
-  const button = createButton();
-  const panel = createPanel();
-
-  addThemes();
-
-  button.onclick = () => {
-    panel.style.right = "0";
-  };
-
-  document.getElementById("cliqlabs-close").onclick = () => {
-    panel.style.right = "-420px";
-  };
-
+  document.head.appendChild(style);
 })();
