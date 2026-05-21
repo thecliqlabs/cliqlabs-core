@@ -1,8 +1,26 @@
 /* ================================================
-   CliqLabs Runtime Loader v6
+   CliqLabs Runtime Loader v7
+   GitHub Pages Edition
    ================================================ */
 
 (function () {
+
+  /* ================================================
+     Inject CSS
+     ================================================ */
+
+  const cliqStyle = document.createElement('link');
+
+  cliqStyle.rel = 'stylesheet';
+
+  cliqStyle.href =
+    'https://thecliqlabs.github.io/cliqlabs-core/theme.css?v=7';
+
+  document.head.appendChild(cliqStyle);
+
+  /* ================================================
+     APPLY THEMES
+     ================================================ */
 
   function applyCliqLabsTheme(theme) {
 
@@ -130,12 +148,11 @@
       z-index:1000000;
       overflow:hidden;
       box-shadow:-10px 0 30px rgba(0,0,0,0.2);
-      border-left:1px solid rgba(255,255,255,0.1);
     `;
 
     panel.innerHTML = `
       <iframe
-        src="https://cdn.thecliqlabs.com"
+        src="https://thecliqlabs.github.io/cliqlabs-core/"
         style="
           width:100%;
           height:100%;
@@ -218,15 +235,6 @@
         NEW
       </span>
     `;
-
-    btn.onmouseenter = function () {
-      this.style.background =
-        'rgba(255,255,255,0.08)';
-    };
-
-    btn.onmouseleave = function () {
-      this.style.background = 'transparent';
-    };
 
     btn.onclick = function () {
       openCliqLabsPanel();
