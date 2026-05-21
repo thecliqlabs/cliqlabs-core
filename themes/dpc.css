@@ -1,0 +1,171 @@
+/* ========================================
+   CLIQLABS — DPC THEME
+======================================== */
+
+:root{
+
+  --cliq-primary:#8dc63f;
+  --cliq-primary-dark:#6fa92b;
+
+  --cliq-sidebar:#050505;
+  --cliq-sidebar-2:#0d0d0d;
+
+  --cliq-text:#111827;
+  --cliq-muted:#6b7280;
+
+  --cliq-bg:#f4f7fb;
+  --cliq-card:#ffffff;
+
+  --cliq-border:#e5e7eb;
+
+  --cliq-radius:14px;
+
+}
+
+/* ========================================
+   APP BG
+======================================== */
+
+body,
+#app{
+  background:var(--cliq-bg)!important;
+}
+
+/* ========================================
+   SIDEBAR
+======================================== */
+
+#sidebar-v2{
+  background:var(--cliq-sidebar)!important;
+  border-right:1px solid #151515!important;
+}
+
+/* logo area */
+
+#sidebar-v2 .hl_nav-header{
+  background:#000!important;
+  border-bottom:1px solid #111!important;
+}
+
+/* menu items */
+
+#sidebar-v2 nav a{
+  color:#d6d6d6!important;
+
+  border-radius:12px!important;
+
+  margin:4px 10px!important;
+
+  transition:all .25s ease!important;
+}
+
+/* hover */
+
+#sidebar-v2 nav a:hover{
+  background:rgba(141,198,63,.10)!important;
+
+  color:#8dc63f!important;
+}
+
+/* active */
+
+#sidebar-v2 nav a.hl-active,
+#sidebar-v2 nav a.active{
+  background:rgba(141,198,63,.15)!important;
+
+  color:#8dc63f!important;
+
+  box-shadow:
+  0 0 18px rgba(141,198,63,.18)!important;
+}
+
+/* icons */
+
+#sidebar-v2 nav a i{
+  color:inherit!important;
+}
+
+/* ========================================
+   TOPBAR
+======================================== */
+
+.hl_header,
+.topmenu-nav{
+  background:#ffffff!important;
+
+  border-bottom:1px solid var(--cliq-border)!important;
+}
+
+/* ========================================
+   CARDS
+======================================== */
+
+.card,
+.hl-card,
+.bg-white,
+.dashboard-card,
+.opportunity-board,
+table{
+  background:var(--cliq-card)!important;
+
+  border-radius:16px!important;
+
+  border:1px solid var(--cliq-border)!important;
+
+  box-shadow:
+  0 2px 12px rgba(0,0,0,.04)!important;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+button,
+.hl-btn{
+  border-radius:12px!important;
+}
+
+/* primary buttons */
+
+.btn-primary,
+.hl-btn-primary{
+  background:#8dc63f!important;
+
+  border-color:#8dc63f!important;
+}
+
+/* ========================================
+   INPUTS
+======================================== */
+
+input,
+select,
+textarea{
+  border-radius:12px!important;
+}
+
+/* ========================================
+   SUBACCOUNT SWITCHER
+======================================== */
+
+.hl_switcher-loc{
+  background:#111!important;
+
+  border:1px solid #222!important;
+
+  border-radius:14px!important;
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#8dc63f;
+  border-radius:20px;
+}
