@@ -1,0 +1,22 @@
+body{
+  background:#0f172a !important;
+}
+
+#sidebar-v2{
+  background:#020617 !important;
+}
+
+#sidebar-v2 *{
+  color:white !important;
+}
+
+.hl-btn,
+button{
+  border-radius:14px !important;
+}
+
+.card,
+.hl-card{
+  border-radius:20px !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.12) !important;
+}
