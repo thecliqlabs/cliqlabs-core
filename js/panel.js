@@ -34,7 +34,7 @@
       CLIQ Themes
     </div>
 
-    <button data-theme="neon" class="cliq-btn">
+    <button data-theme="dpc" class="cliq-btn">
       Neon Theme
     </button>
 
