@@ -1,0 +1,226 @@
+/* ======================================================
+   CLIQLABS — CHERRY NOIR THEME
+====================================================== */
+
+:root{
+
+  /* CORE COLORS */
+  --cliq-bg:#0b0b0d;
+  --cliq-surface:#131417;
+  --cliq-surface-2:#1a1c20;
+
+  --cliq-sidebar:#09090b;
+  --cliq-topbar:#101115;
+
+  --cliq-border:rgba(255,255,255,.06);
+
+  --cliq-text:#f5f5f5;
+  --cliq-muted:#9ca3af;
+
+  --cliq-primary:#c91d4f;
+  --cliq-primary-hover:#e11d5d;
+
+  --cliq-gradient:
+  linear-gradient(
+    135deg,
+    #7a102f 0%,
+    #c91d4f 45%,
+    #ff4d6d 100%
+  );
+
+  --cliq-shadow:
+  0 10px 40px rgba(0,0,0,.45);
+
+  --cliq-radius:14px;
+}
+
+
+/* ======================================================
+   GLOBAL
+====================================================== */
+
+body{
+  background:var(--cliq-bg)!important;
+  color:var(--cliq-text)!important;
+}
+
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
+
+#sidebar-v2,
+.hl_navbar,
+.sidebar,
+.aside,
+nav{
+  background:var(--cliq-sidebar)!important;
+  border-right:1px solid var(--cliq-border)!important;
+}
+
+
+/* MENU ITEMS */
+
+nav a,
+.sidebar a,
+.hl_navbar a{
+  color:rgba(255,255,255,.72)!important;
+  transition:all .18s ease;
+  border-radius:10px!important;
+}
+
+nav a:hover,
+.sidebar a:hover,
+.hl_navbar a:hover{
+  background:rgba(255,255,255,.04)!important;
+  color:#fff!important;
+}
+
+
+/* ACTIVE MENU */
+
+nav a.active,
+.sidebar a.active,
+.hl_navbar a.active{
+  background:var(--cliq-gradient)!important;
+  color:#fff!important;
+  box-shadow:
+  0 8px 24px rgba(201,29,79,.35);
+}
+
+
+/* ======================================================
+   TOPBAR
+====================================================== */
+
+.top-header,
+.topbar,
+header{
+  background:var(--cliq-topbar)!important;
+  border-bottom:1px solid var(--cliq-border)!important;
+}
+
+
+/* ======================================================
+   CARDS
+====================================================== */
+
+.card,
+.hl-card,
+.dashboard-card,
+.bg-white{
+
+  background:var(--cliq-surface)!important;
+
+  border:
+  1px solid var(--cliq-border)!important;
+
+  border-radius:
+  var(--cliq-radius)!important;
+
+  box-shadow:
+  var(--cliq-shadow)!important;
+}
+
+
+/* ======================================================
+   TABLES
+====================================================== */
+
+table{
+  background:var(--cliq-surface)!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+}
+
+table th{
+  background:#16181c!important;
+  color:#fff!important;
+}
+
+table td{
+  border-color:
+  rgba(255,255,255,.04)!important;
+  color:#e5e7eb!important;
+}
+
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
+button,
+.btn,
+.hl-btn-primary{
+
+  background:
+  var(--cliq-gradient)!important;
+
+  border:none!important;
+
+  color:#fff!important;
+
+  border-radius:12px!important;
+
+  transition:all .18s ease;
+}
+
+button:hover,
+.btn:hover,
+.hl-btn-primary:hover{
+  transform:translateY(-1px);
+  opacity:.96;
+}
+
+
+/* ======================================================
+   INPUTS
+====================================================== */
+
+input,
+textarea,
+select{
+
+  background:
+  var(--cliq-surface-2)!important;
+
+  border:
+  1px solid var(--cliq-border)!important;
+
+  color:#fff!important;
+
+  border-radius:12px!important;
+}
+
+
+/* ======================================================
+   MODALS
+====================================================== */
+
+.modal-content{
+  background:var(--cliq-surface)!important;
+  border:1px solid var(--cliq-border)!important;
+  border-radius:18px!important;
+}
+
+
+/* ======================================================
+   SCROLLBAR
+====================================================== */
+
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#0d0d0f;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#2a2d33;
+  border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#3a3f47;
+}
