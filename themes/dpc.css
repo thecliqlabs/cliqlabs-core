@@ -1,171 +1,435 @@
-/* ========================================
-   CLIQLABS — DPC THEME
-======================================== */
+/*
+  =============================================
+  TheCliqLabs — DPC Dark Green Theme
+  Version 1.0
+  Hosted at: cdn.thecliqlabs.com/themes/dpc-green.css
+  =============================================
+*/
 
-:root{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-  --cliq-primary:#8dc63f;
-  --cliq-primary-dark:#6fa92b;
-
-  --cliq-sidebar:#050505;
-  --cliq-sidebar-2:#0d0d0d;
-
-  --cliq-text:#111827;
-  --cliq-muted:#6b7280;
-
-  --cliq-bg:#f4f7fb;
-  --cliq-card:#ffffff;
-
-  --cliq-border:#e5e7eb;
-
-  --cliq-radius:14px;
-
+:root {
+  --cliq-primary:        #5fc800;
+  --cliq-primary-dark:   #4a9900;
+  --cliq-primary-light:  rgba(95,200,0,0.12);
+  --cliq-primary-tint:   rgba(95,200,0,0.08);
+  --cliq-sidebar-bg:     #000000;
+  --cliq-sidebar-text:   #ffffff;
+  --cliq-sidebar-icon:   #ffffff;
+  --cliq-sidebar-hover:  rgba(95,200,0,0.15);
+  --cliq-sidebar-active: rgba(95,200,0,0.2);
+  --cliq-header-bg:      #ffffff;
+  --cliq-body-bg:        #f4f6f9;
+  --cliq-tab-active-bg:  #111111;
+  --cliq-tab-active-text:#ffffff;
+  --cliq-btn-bg:         #5fc800;
+  --cliq-btn-text:       #ffffff;
+  --cliq-btn-hover:      #4a9900;
 }
 
-/* ========================================
-   APP BG
-======================================== */
-
+/* =============================================
+   FONTS
+   ============================================= */
 body,
-#app{
-  background:var(--cliq-bg)!important;
-}
-
-/* ========================================
-   SIDEBAR
-======================================== */
-
-#sidebar-v2{
-  background:var(--cliq-sidebar)!important;
-  border-right:1px solid #151515!important;
-}
-
-/* logo area */
-
-#sidebar-v2 .hl_nav-header{
-  background:#000!important;
-  border-bottom:1px solid #111!important;
-}
-
-/* menu items */
-
-#sidebar-v2 nav a{
-  color:#d6d6d6!important;
-
-  border-radius:12px!important;
-
-  margin:4px 10px!important;
-
-  transition:all .25s ease!important;
-}
-
-/* hover */
-
-#sidebar-v2 nav a:hover{
-  background:rgba(141,198,63,.10)!important;
-
-  color:#8dc63f!important;
-}
-
-/* active */
-
-#sidebar-v2 nav a.hl-active,
-#sidebar-v2 nav a.active{
-  background:rgba(141,198,63,.15)!important;
-
-  color:#8dc63f!important;
-
-  box-shadow:
-  0 0 18px rgba(141,198,63,.18)!important;
-}
-
-/* icons */
-
-#sidebar-v2 nav a i{
-  color:inherit!important;
-}
-
-/* ========================================
-   TOPBAR
-======================================== */
-
+#sidebar-v2,
 .hl_header,
-.topmenu-nav{
-  background:#ffffff!important;
-
-  border-bottom:1px solid var(--cliq-border)!important;
+.topmenu-nav,
+nav {
+  font-family: 'Inter', sans-serif !important;
 }
 
-/* ========================================
-   CARDS
-======================================== */
-
-.card,
-.hl-card,
-.bg-white,
-.dashboard-card,
-.opportunity-board,
-table{
-  background:var(--cliq-card)!important;
-
-  border-radius:16px!important;
-
-  border:1px solid var(--cliq-border)!important;
-
-  box-shadow:
-  0 2px 12px rgba(0,0,0,.04)!important;
+/* =============================================
+   SIDEBAR — Pure Black Background
+   ============================================= */
+#sidebar-v2,
+.v2-open #sidebar-v2,
+#sidebar-v2.default-bg-color,
+.default-bg-color {
+  background-color: var(--cliq-sidebar-bg) !important;
 }
 
-/* ========================================
-   BUTTONS
-======================================== */
-
-button,
-.hl-btn{
-  border-radius:12px!important;
+/* =============================================
+   SIDEBAR — Text & Icons White
+   ============================================= */
+#sidebar-v2 .text-white,
+#sidebar-v2 nav span,
+#sidebar-v2 .nav-title,
+#sidebar-v2 a[id^="sb_"] span,
+#sidebar-v2 a[id^="sb_"] .nav-title {
+  color: var(--cliq-sidebar-text) !important;
 }
 
-/* primary buttons */
-
-.btn-primary,
-.hl-btn-primary{
-  background:#8dc63f!important;
-
-  border-color:#8dc63f!important;
+/* SVG Icon strokes */
+#sidebar-v2 nav svg path {
+  stroke: var(--cliq-sidebar-icon) !important;
 }
 
-/* ========================================
-   INPUTS
-======================================== */
-
-input,
-select,
-textarea{
-  border-radius:12px!important;
+/* Some icons use fill */
+#sidebar-v2 #sb_contacts svg path,
+#sidebar-v2 #sb_sites svg path,
+#sidebar-v2 #sb_agency-partners svg path {
+  fill: var(--cliq-sidebar-icon) !important;
+  stroke: none !important;
 }
 
-/* ========================================
-   SUBACCOUNT SWITCHER
-======================================== */
-
-.hl_switcher-loc{
-  background:#111!important;
-
-  border:1px solid #222!important;
-
-  border-radius:14px!important;
+/* Font Awesome icons */
+#sidebar-v2 i,
+#sidebar-v2 i.text-white {
+  color: var(--cliq-sidebar-icon) !important;
 }
 
-/* ========================================
-   SCROLLBAR
-======================================== */
-
-::-webkit-scrollbar{
-  width:8px;
-  height:8px;
+/* =============================================
+   SIDEBAR — Active & Hover States
+   ============================================= */
+#sidebar-v2 a[id^="sb_"]:hover {
+  background: var(--cliq-sidebar-hover) !important;
+  border-radius: 6px !important;
 }
 
-::-webkit-scrollbar-thumb{
-  background:#8dc63f;
-  border-radius:20px;
+#sidebar-v2 a[id^="sb_"].active,
+#sidebar-v2 a[id^="sb_"].exact-active,
+#sidebar-v2 nav a.active {
+  background: var(--cliq-sidebar-active) !important;
+  border-radius: 6px !important;
+}
+
+#sidebar-v2 a[id^="sb_"].active .nav-title,
+#sidebar-v2 a[id^="sb_"].exact-active .nav-title,
+#sidebar-v2 a[id^="sb_"].active span,
+#sidebar-v2 a[id^="sb_"].exact-active span {
+  color: var(--cliq-primary) !important;
+  font-weight: 600 !important;
+}
+
+#sidebar-v2 a[id^="sb_"].active svg path,
+#sidebar-v2 a[id^="sb_"].exact-active svg path {
+  stroke: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   SIDEBAR — Location Switcher
+   ============================================= */
+#location-switcher-sidbar-v2 {
+  background: rgba(255,255,255,0.07) !important;
+  border-radius: 8px !important;
+}
+
+.hl_switcher-loc-name,
+.hl_switcher-loc-city,
+#location-switcher-sidbar-v2 span {
+  color: var(--cliq-sidebar-text) !important;
+}
+
+/* =============================================
+   SIDEBAR — Search Bar
+   ============================================= */
+#globalSearchOpener {
+  background: rgba(255,255,255,0.07) !important;
+  border-radius: 6px !important;
+}
+
+#globalSearchOpener .search-placeholder {
+  color: rgba(255,255,255,0.4) !important;
+}
+
+.search-shortcut {
+  background: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+
+/* =============================================
+   SIDEBAR — Quick Actions
+   ============================================= */
+#quickActions {
+  background: rgba(255,255,255,0.07) !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+}
+
+/* =============================================
+   SIDEBAR — Dividers
+   ============================================= */
+#sidebar-v2 .divider p,
+#sidebar-v2 #sb_divider-1 {
+  border-color: rgba(255,255,255,0.08) !important;
+  background: transparent !important;
+}
+
+/* =============================================
+   SIDEBAR — Settings & Back Button
+   ============================================= */
+#sidebar-v2 #backButtonv2 {
+  background: var(--cliq-sidebar-hover) !important;
+}
+
+#sb_other-settings,
+#sb_business-services {
+  background: transparent !important;
+}
+
+/* =============================================
+   SIDEBAR — Collapse Button
+   ============================================= */
+.hl_collapse-button {
+  background: var(--cliq-primary) !important;
+  color: var(--cliq-sidebar-bg) !important;
+}
+
+/* =============================================
+   HEADER — White with Green Top Border
+   ============================================= */
+HEADER.hl_header {
+  background-color: var(--cliq-header-bg) !important;
+  border-top: 3px solid var(--cliq-primary) !important;
+}
+
+/* Header buttons */
+#hl_header--help-icon {
+  background-color: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary) !important;
+}
+
+#hl_header--copilot-icon {
+  color: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary-light) !important;
+}
+
+#canny_logs-toggle {
+  background-color: var(--cliq-primary-dark) !important;
+}
+
+/* =============================================
+   TOP NAVIGATION TABS — Black Pill Style
+   ============================================= */
+a.topmenu-navitem.active,
+.topmenu-navitem.active {
+  background-color: var(--cliq-tab-active-bg) !important;
+  color: var(--cliq-tab-active-text) !important;
+  border-radius: 6px !important;
+  border-bottom: none !important;
+  padding: 5px 14px !important;
+}
+
+a.topmenu-navitem:not(.active),
+.topmenu-navitem:not(.active) {
+  color: #555555 !important;
+  background: transparent !important;
+  border-bottom: none !important;
+}
+
+/* Submenu active */
+a[id^="tb-sub_"].active {
+  color: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   BUTTONS — ALL Primary Buttons Green
+   ============================================= */
+
+/* GHL uses .bg-apple-500 for most buttons */
+.bg-apple-500,
+button.bg-apple-500,
+a.bg-apple-500,
+.bg-apple-600,
+.hover\:bg-apple-600:hover {
+  background-color: var(--cliq-btn-bg) !important;
+  border-color: var(--cliq-btn-bg) !important;
+  color: var(--cliq-btn-text) !important;
+}
+
+/* Naïve UI buttons */
+.n-button--primary-type {
+  background-color: var(--cliq-btn-bg) !important;
+  color: var(--cliq-btn-text) !important;
+}
+
+.n-button--primary-type:hover {
+  background-color: var(--cliq-btn-hover) !important;
+}
+
+/* Highrise UI buttons */
+.hr-button--primary-type,
+.hr-button--primary,
+.hr-button--default-type.hr-button--primary {
+  background-color: var(--cliq-btn-bg) !important;
+  color: var(--cliq-btn-text) !important;
+}
+
+/* Tertiary/Ghost buttons */
+.n-button--tertiary-type,
+.hr-button--tertiary-type {
+  background-color: var(--cliq-primary-light) !important;
+  color: #3a7800 !important;
+}
+
+/* Specific GHL action buttons */
+#new-appointment-button,
+#add-record-btn,
+#data-create-opportunity,
+#new-conversation-btn-collapsed,
+#hl-media-upload,
+#create-new-button,
+#use-existing-phone-btn,
+#conversations-view-all-btn {
+  background-color: var(--cliq-btn-bg) !important;
+  border-color: var(--cliq-btn-bg) !important;
+  color: var(--cliq-btn-text) !important;
+}
+
+/* Import button */
+#import-btn {
+  color: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary) !important;
+}
+
+/* Focus rings */
+*:focus {
+  --tw-ring-color: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   ACTIVE LINKS & HIGHLIGHTS
+   ============================================= */
+a.topmenu-navitem.active {
+  color: var(--cliq-tab-active-text) !important;
+}
+
+/* Primary color text links */
+.text-curious-blue-500,
+.text-blue-600,
+a.text-blue-600,
+.text-primary-600 {
+  color: var(--cliq-primary) !important;
+}
+
+svg.text-primary-600,
+svg.h-5.w-5.text-primary-600,
+svg.pointer.ml-2.text-primary-600 {
+  color: var(--cliq-primary) !important;
+}
+
+/* Loading spinner */
+.n-base-loading,
+.hr-base-loading,
+.lds-ring div {
+  border-color: var(--cliq-primary) transparent transparent transparent !important;
+}
+
+/* =============================================
+   PAGINATION
+   ============================================= */
+.n-pagination-item--active {
+  color: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary) !important;
+}
+
+.tabulator-page.active {
+  color: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   CARD HEADERS
+   ============================================= */
+.card-header {
+  background-color: #f8f9fa !important;
+}
+
+/* =============================================
+   CONVERSATIONS — Active States
+   ============================================= */
+#conv-menu-item-team-inbox.active {
+  color: var(--cliq-primary) !important;
+  background: var(--cliq-primary-light) !important;
+}
+
+/* =============================================
+   CONTACTS — Count Badge
+   ============================================= */
+DIV.count {
+  background-color: var(--cliq-primary-light) !important;
+  color: #3a7800 !important;
+}
+
+/* =============================================
+   OPPORTUNITIES — Active Toggles
+   ============================================= */
+#kanban-toggle-btn.active,
+#list-view-advance-filter-btn.active,
+#list-view-sort-btn.active {
+  background-color: var(--cliq-primary-light) !important;
+  color: #3a7800 !important;
+  border-color: rgba(95,200,0,0.3) !important;
+}
+
+.bulk-action.d-flex {
+  background-color: var(--cliq-primary-light) !important;
+  color: #3a7800 !important;
+}
+
+/* =============================================
+   CALENDAR
+   ============================================= */
+.fc-day-today {
+  color: var(--cliq-primary) !important;
+}
+
+.n-radio__dot--checked {
+  background-color: var(--cliq-primary-light) !important;
+  border-color: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   DIALER
+   ============================================= */
+.dialer .flex.items-center.justify-between.border-b.border-gray-200.px-2.py-1 {
+  background-color: var(--cliq-primary-tint) !important;
+}
+
+/* =============================================
+   KANBAN BOARD STAGE HEADERS
+   ============================================= */
+.crm-opportunities-stage-header {
+  border-top: 3px solid var(--cliq-primary) !important;
+}
+
+/* =============================================
+   NAÏVE UI SELECT / DROPDOWN FOCUS
+   ============================================= */
+.n-base-selection--active .n-base-selection__border,
+.n-base-selection:hover .n-base-selection__border {
+  border-color: var(--cliq-primary) !important;
+}
+
+.n-input:focus-within .n-input__border,
+.hr-input:focus-within .hr-input__border {
+  border-color: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   LOGIN PAGE
+   ============================================= */
+section.hl_login,
+.hl_login--wrapper {
+  background: #000000 !important;
+}
+
+section.hl_login .bg-apple-500,
+section.hl_login button[type="submit"] {
+  background-color: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary) !important;
+  color: #ffffff !important;
+}
+
+section.hl_login .text-curious-blue-500,
+section.hl_login a {
+  color: var(--cliq-primary) !important;
+}
+
+/* =============================================
+   CHECKBOX & TOGGLE ACTIVE
+   ============================================= */
+.n-checkbox.n-checkbox--checked .n-checkbox-box {
+  background: var(--cliq-primary) !important;
+  border-color: var(--cliq-primary) !important;
 }
