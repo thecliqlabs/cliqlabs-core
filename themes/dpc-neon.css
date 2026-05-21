@@ -1,289 +1,215 @@
-/* =========================
-   CLIQLABS — DPC NEON
-========================= */
+/* ========================================
+   CLIQLABS — DPC STYLE THEME
+======================================== */
 
-:root{
-
-  --cl-bg:#eef1f5;
-  --cl-surface:#ffffff;
-  --cl-surface-2:#f8fafc;
-
-  --cl-sidebar:#050505;
-  --cl-sidebar-2:#0d0d0d;
-
-  --cl-primary:#97d83e;
-  --cl-primary-dark:#7cc62b;
-
-  --cl-text:#111827;
-  --cl-muted:#64748b;
-
-  --cl-border:#dbe2ea;
-
-  --cl-radius:14px;
-
-  --cl-shadow:
-  0 2px 6px rgba(0,0,0,.05);
-
-}
-
-/* =========================
-   APP BACKGROUND
-========================= */
-
+/* MAIN APP */
 body,
 #app{
-  background:var(--cl-bg)!important;
+    background:#f4f5f7 !important;
+    color:#111827 !important;
+    font-family:Inter,sans-serif;
 }
 
-/* =========================
+/* ========================================
    SIDEBAR
-========================= */
+======================================== */
 
-.hl_navbar,
 #sidebar-v2,
+.hl_navbar,
 .sidebar-v2-location{
-  background:
-  linear-gradient(
-    180deg,
-    #050505 0%,
-    #0d0d0d 100%
-  )!important;
-
-  border-right:
-  1px solid rgba(255,255,255,.04)!important;
+    background:#050505 !important;
+    border-right:1px solid rgba(145,255,0,.08);
 }
 
-/* sidebar items */
+/* SIDEBAR TOP LOGO AREA */
 
-.hl_navbar a,
-#sidebar-v2 a{
-  border-radius:10px!important;
-  margin:4px 10px!important;
-
-  transition:.2s ease;
+.sidebar-v2-location{
+    padding-top:10px !important;
 }
 
-/* active */
+/* SEARCH */
 
-.hl_navbar a.active,
-#sidebar-v2 a.active{
-  background:
-  linear-gradient(
-    90deg,
-    rgba(151,216,62,.25),
-    rgba(151,216,62,.08)
-  )!important;
-
-  color:#fff!important;
-
-  border-left:
-  3px solid var(--cl-primary)!important;
-
-  box-shadow:
-  0 0 18px rgba(151,216,62,.18);
+.sidebar-v2-location input,
+#sidebar-v2 input{
+    background:#f5f5f5 !important;
+    border:none !important;
+    border-radius:10px !important;
 }
 
-/* hover */
+/* MENU ITEMS */
 
-.hl_navbar a:hover,
-#sidebar-v2 a:hover{
-  background:
-  rgba(255,255,255,.04)!important;
+#sidebar-v2 nav a,
+.hl_navbar a{
+    color:#8f949c !important;
+    border-radius:12px !important;
+    margin:4px 8px !important;
+    transition:all .2s ease;
 }
 
-/* =========================
+/* HOVER */
+
+#sidebar-v2 nav a:hover{
+    background:rgba(145,255,0,.08) !important;
+    color:#ffffff !important;
+}
+
+/* ACTIVE MENU */
+
+#sidebar-v2 nav a.active,
+#sidebar-v2 nav a.router-link-active,
+.hl_navbar .active{
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(145,255,0,.18),
+        rgba(145,255,0,.03)
+    ) !important;
+
+    color:#d9ff75 !important;
+
+    box-shadow:
+    inset 0 0 0 1px rgba(145,255,0,.12),
+    0 0 20px rgba(145,255,0,.08);
+
+}
+
+/* SIDEBAR DIVIDER */
+
+#sidebar-v2 hr{
+    border-color:rgba(255,255,255,.06) !important;
+}
+
+/* ========================================
    TOP HEADER
-========================= */
+======================================== */
 
-.topmenu-nav,
 .hl_header,
-header{
-  background:#ffffff!important;
+.topmenu-nav,
+.top-header{
 
-  border-bottom:
-  1px solid var(--cl-border)!important;
-
-  box-shadow:
-  0 1px 2px rgba(0,0,0,.04)!important;
+    background:#ffffff !important;
+    border-bottom:1px solid #e5e7eb !important;
+    position:relative;
 }
 
-/* green strip */
+/* GREEN TOP LINE */
 
-.topmenu-nav::before,
-.hl_header::before{
-  content:"";
+.hl_header::before,
+.topmenu-nav::before{
 
-  position:absolute;
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:3px;
 
-  top:0;
-  left:0;
-
-  width:100%;
-  height:4px;
-
-  background:
-  linear-gradient(
-    90deg,
-    #97d83e,
-    #b5f45f
-  );
+    background:#97d83e;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
+.main-content,
+.hl-wrapper,
+.app-content,
+#location-dashboard{
+
+    background:#f4f5f7 !important;
+}
+
+/* CARDS */
 
 .card,
 .hl-card,
-.bg-white,
-.dashboard-card{
+.widget,
+.bg-white{
 
-  background:#fff!important;
+    background:#ffffff !important;
+    border-radius:18px !important;
 
-  border:
-  1px solid var(--cl-border)!important;
+    border:1px solid #e5e7eb !important;
 
-  border-radius:
-  var(--cl-radius)!important;
-
-  box-shadow:
-  var(--cl-shadow)!important;
+    box-shadow:
+    0 1px 2px rgba(0,0,0,.03);
 }
 
-/* =========================
+/* ========================================
    TABLES
-========================= */
+======================================== */
 
 table{
-  background:#fff!important;
-
-  border-radius:
-  14px!important;
-
-  overflow:hidden!important;
-
-  border:
-  1px solid var(--cl-border)!important;
+    background:#ffffff !important;
 }
 
-thead{
-  background:#f5f7fb!important;
+th{
+    background:#f9fafb !important;
+    color:#6b7280 !important;
 }
 
-tr{
-  border-color:
-  #edf2f7!important;
-}
-
-tr:hover{
-  background:
-  rgba(151,216,62,.05)!important;
-}
-
-/* =========================
+/* ========================================
    BUTTONS
-========================= */
+======================================== */
 
 button,
-.btn,
-.hl-btn{
+.btn{
 
-  border-radius:12px!important;
-
-  font-weight:600!important;
-
-  transition:.2s ease!important;
+    border-radius:12px !important;
+    font-weight:600 !important;
 }
 
-/* primary buttons */
+/* PRIMARY BUTTON */
 
 .btn-primary,
-.hl-btn-primary{
+button.hl-btn-primary{
 
-  background:
-  linear-gradient(
-    135deg,
-    #97d83e,
-    #7cc62b
-  )!important;
-
-  border:none!important;
-
-  color:#000!important;
-
-  box-shadow:
-  0 8px 20px rgba(151,216,62,.22)!important;
+    background:#97d83e !important;
+    border:none !important;
+    color:#000 !important;
 }
 
-.btn-primary:hover,
-.hl-btn-primary:hover{
+/* ========================================
+   SUBACCOUNT SWITCHER
+======================================== */
 
-  transform:
-  translateY(-1px);
+.location-switcher,
+.switcher,
+.modal-content{
 
-  box-shadow:
-  0 10px 25px rgba(151,216,62,.30)!important;
+    border-radius:20px !important;
+    overflow:hidden !important;
 }
 
-/* =========================
-   INPUTS
-========================= */
+/* SWITCHER CARDS */
 
-input,
-textarea,
-select{
+.location-card,
+.switcher .card{
 
-  background:#fff!important;
-
-  border:
-  1px solid #d7dee8!important;
-
-  border-radius:12px!important;
-
-  box-shadow:none!important;
+    border-radius:14px !important;
+    border:1px solid #ececec !important;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
+/* ========================================
+   CONVERSATIONS
+======================================== */
 
-  border-color:
-  var(--cl-primary)!important;
+.conversation-left-panel{
 
-  box-shadow:
-  0 0 0 4px rgba(151,216,62,.15)!important;
+    background:#ffffff !important;
+    border-right:1px solid #ececec !important;
 }
 
-/* =========================
-   TABS
-========================= */
-
-.nav-tabs .nav-link.active{
-
-  background:
-  rgba(151,216,62,.12)!important;
-
-  border-color:
-  rgba(151,216,62,.25)!important;
-
-  color:#111!important;
-
-  border-radius:10px!important;
-}
-
-/* =========================
+/* ========================================
    SCROLLBAR
-========================= */
+======================================== */
 
 ::-webkit-scrollbar{
-  width:10px;
+    width:8px;
 }
 
 ::-webkit-scrollbar-thumb{
-  background:#c7d2da;
-  border-radius:20px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-  background:#97d83e;
+    background:#cfcfcf;
+    border-radius:20px;
 }
