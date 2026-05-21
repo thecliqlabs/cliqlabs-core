@@ -1,266 +1,93 @@
-/* ================================================
-   CliqLabs Runtime Loader v7
-   GitHub Pages Edition
-   ================================================ */
-
 (function () {
+  console.log("CliqLabs Runtime Loaded");
 
-  /* ================================================
-     Inject CSS
-     ================================================ */
+  // Prevent duplicate loading
+  if (window.cliqLabsLoaded) return;
+  window.cliqLabsLoaded = true;
 
-  const cliqStyle = document.createElement('link');
+  // Inject base CSS
+  const baseCSS = document.createElement("link");
+  baseCSS.rel = "stylesheet";
+  baseCSS.href = "https://cdn.thecliqlabs.com/theme.css?v=" + Date.now();
+  document.head.appendChild(baseCSS);
 
-  cliqStyle.rel = 'stylesheet';
+  // Inject saved theme
+  const savedTheme =
+    localStorage.getItem("cliq-theme") || "dark-pro";
 
-  cliqStyle.href =
-    'https://thecliqlabs.github.io/cliqlabs-core/theme.css?v=7';
+  const themeCSS = document.createElement("link");
+  themeCSS.rel = "stylesheet";
+  themeCSS.id = "cliq-theme-style";
+  themeCSS.href =
+    "https://cdn.thecliqlabs.com/themes/" +
+    savedTheme +
+    ".css?v=" +
+    Date.now();
 
-  document.head.appendChild(cliqStyle);
+  document.head.appendChild(themeCSS);
 
-  /* ================================================
-     APPLY THEMES
-     ================================================ */
+  // Floating Button
+  const btn = document.createElement("div");
+  btn.id = "cliqlabs-floating-btn";
+  btn.innerHTML = "🎨";
+  document.body.appendChild(btn);
 
-  function applyCliqLabsTheme(theme) {
+  // Panel
+  const panel = document.createElement("div");
+  panel.id = "cliqlabs-panel";
 
-    const root = document.documentElement;
+  panel.innerHTML = `
+    <div class="cliq-header">
+      <h2>CliqLabs</h2>
+      <span>Runtime Branding System</span>
+    </div>
 
-    const themes = {
+    <div class="cliq-theme-list">
 
-      purple: {
-        sidebar: '#581c87',
-        text: '#ffffff',
-        icon: '#ffffff',
-        button: '#7c3aed',
-        card: '#6d28d9'
-      },
+      <div class="cliq-theme-card" data-theme="dark-pro">
+        <div class="cliq-preview dark-pro-preview"></div>
+        <h3>Dark Pro</h3>
+      </div>
 
-      blue: {
-        sidebar: '#0f172a',
-        text: '#ffffff',
-        icon: '#38bdf8',
-        button: '#0284c7',
-        card: '#0369a1'
-      },
+      <div class="cliq-theme-card" data-theme="midnight">
+        <div class="cliq-preview midnight-preview"></div>
+        <h3>Midnight</h3>
+      </div>
 
-      green: {
-        sidebar: '#052e16',
-        text: '#ffffff',
-        icon: '#4ade80',
-        button: '#16a34a',
-        card: '#15803d'
-      },
+      <div class="cliq-theme-card" data-theme="glass">
+        <div class="cliq-preview glass-preview"></div>
+        <h3>Glass</h3>
+      </div>
 
-      dark: {
-        sidebar: '#111827',
-        text: '#ffffff',
-        icon: '#9ca3af',
-        button: '#374151',
-        card: '#1f2937'
-      }
+      <div class="cliq-theme-card" data-theme="executive">
+        <div class="cliq-preview executive-preview"></div>
+        <h3>Executive</h3>
+      </div>
 
-    };
+    </div>
+  `;
 
-    const selected = themes[theme];
+  document.body.appendChild(panel);
 
-    if (!selected) return;
-
-    root.style.setProperty('--cliqlabs-sidebar', selected.sidebar);
-    root.style.setProperty('--cliqlabs-text', selected.text);
-    root.style.setProperty('--cliqlabs-icon', selected.icon);
-    root.style.setProperty('--cliqlabs-button', selected.button);
-    root.style.setProperty('--cliqlabs-card', selected.card);
-
-    localStorage.setItem(
-      'cliqlabs-theme',
-      theme
-    );
-
-  }
-
-  /* ================================================
-     LOAD SAVED THEME
-     ================================================ */
-
-  window.addEventListener('load', function () {
-
-    const savedTheme =
-      localStorage.getItem('cliqlabs-theme');
-
-    if (savedTheme) {
-      applyCliqLabsTheme(savedTheme);
-    }
-
+  // Toggle Panel
+  btn.addEventListener("click", () => {
+    panel.classList.toggle("open");
   });
 
-  /* ================================================
-     LISTEN FROM PANEL
-     ================================================ */
+  // Theme Switch
+  document.querySelectorAll(".cliq-theme-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const theme = card.dataset.theme;
 
-  window.addEventListener('message', function (event) {
+      localStorage.setItem("cliq-theme", theme);
 
-    if (
-      event.data &&
-      event.data.type === 'CLIQLABS_APPLY_THEME'
-    ) {
-
-      applyCliqLabsTheme(event.data.theme);
-
-    }
-
+      document.getElementById(
+        "cliq-theme-style"
+      ).href =
+        "https://cdn.thecliqlabs.com/themes/" +
+        theme +
+        ".css?v=" +
+        Date.now();
+    });
   });
-
-  /* ================================================
-     OPEN PANEL
-     ================================================ */
-
-  function openCliqLabsPanel() {
-
-    if (document.getElementById('cliqlabs-panel')) return;
-
-    const overlay = document.createElement('div');
-
-    overlay.id = 'cliqlabs-overlay';
-
-    overlay.style.cssText = `
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.45);
-      z-index:999999;
-      backdrop-filter:blur(2px);
-    `;
-
-    overlay.onclick = closeCliqLabsPanel;
-
-    const panel = document.createElement('div');
-
-    panel.id = 'cliqlabs-panel';
-
-    panel.style.cssText = `
-      position:fixed;
-      top:0;
-      right:0;
-      width:540px;
-      max-width:100%;
-      height:100vh;
-      background:white;
-      z-index:1000000;
-      overflow:hidden;
-      box-shadow:-10px 0 30px rgba(0,0,0,0.2);
-    `;
-
-    panel.innerHTML = `
-      <iframe
-        src="https://thecliqlabs.github.io/cliqlabs-core/"
-        style="
-          width:100%;
-          height:100%;
-          border:none;
-          background:white;
-        "
-      ></iframe>
-    `;
-
-    document.body.appendChild(overlay);
-    document.body.appendChild(panel);
-
-  }
-
-  function closeCliqLabsPanel() {
-
-    const panel =
-      document.getElementById('cliqlabs-panel');
-
-    const overlay =
-      document.getElementById('cliqlabs-overlay');
-
-    if (panel) panel.remove();
-    if (overlay) overlay.remove();
-
-  }
-
-  /* ================================================
-     ADD SIDEBAR BUTTON
-     ================================================ */
-
-  function addCliqLabsButton() {
-
-    if (document.getElementById('cliqlabs-nav-btn')) return;
-
-    const nav =
-      document.querySelector('#sidebar-v2 nav');
-
-    if (!nav) return;
-
-    const btn = document.createElement('a');
-
-    btn.id = 'cliqlabs-nav-btn';
-
-    btn.style.cssText = `
-      display:flex;
-      align-items:center;
-      gap:10px;
-      width:100%;
-      padding:10px 14px;
-      margin-top:6px;
-      border-radius:12px;
-      cursor:pointer;
-      text-decoration:none;
-      color:white;
-      font-family:Inter,sans-serif;
-      transition:all .2s ease;
-      opacity:.92;
-    `;
-
-    btn.innerHTML = `
-      <span style="font-size:16px;">⚡</span>
-
-      <span style="
-        font-size:14px;
-        font-weight:600;
-        flex:1;
-      ">
-        CliqLabs
-      </span>
-
-      <span style="
-        background:#7c3aed;
-        color:white;
-        font-size:9px;
-        font-weight:800;
-        padding:2px 6px;
-        border-radius:5px;
-      ">
-        NEW
-      </span>
-    `;
-
-    btn.onclick = function () {
-      openCliqLabsPanel();
-    };
-
-    nav.appendChild(btn);
-
-  }
-
-  /* ================================================
-     INIT
-     ================================================ */
-
-  const initInterval = setInterval(function () {
-
-    const sidebar =
-      document.querySelector('#sidebar-v2 nav');
-
-    if (sidebar) {
-
-      clearInterval(initInterval);
-
-      addCliqLabsButton();
-
-    }
-
-  }, 500);
-
 })();
